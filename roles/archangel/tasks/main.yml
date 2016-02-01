@@ -1,0 +1,11 @@
+---
+- include: pacman.yml
+- include: user.yml
+
+- include: zsh.yml
+  become: yes
+  become_user: "{{ username }}"
+
+- include: vim.yml
+  become: yes
+  become_user: "{{ username }}"

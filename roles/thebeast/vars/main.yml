@@ -1,0 +1,4 @@
+---
+ansible_python_interpreter: /usr/bin/python2
+username: beast
+userpasswd: $6$5KysWbzw$jDZrsdhKJb.7zaAxT8p8PDF0AyK5ky4IQKtu0LSlusnjB8Quqve5FTmI6wTr2Dyh4IXr60jazYvrd8q.brHyz.

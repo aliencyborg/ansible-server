@@ -1,0 +1,4 @@
+---
+- hosts: thebeast
+  roles:
+    - thebeast

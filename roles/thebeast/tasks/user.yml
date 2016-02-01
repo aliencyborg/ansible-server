@@ -1,0 +1,16 @@
+---
+- name: install sudo
+  pacman: name=sudo
+
+- name: create normal user
+  user: name={{ username }} createhome=yes group=users groups=wheel
+    password={{userpasswd}}
+
+- name: add user to sudoers
+  template: src=sudoers
+    dest=/etc/sudoers.d/10_{{ username }}
+    validate='visudo -cf %s'
+
+- name: change user shell
+  command: chsh -s /bin/zsh "{{ username }}"
+

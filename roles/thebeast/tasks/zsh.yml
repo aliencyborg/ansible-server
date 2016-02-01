@@ -1,0 +1,11 @@
+---
+- name: clone oh-my-zsh
+  git: repo=https://github.com/robbyrussell/oh-my-zsh.git
+    dest=~/.oh-my-zsh
+
+- name: copy zshrc to user home
+  copy: src=zshrc dest=~/.zshrc
+
+- name: clone dircolors-solarized
+  git: repo=https://github.com/seebi/dircolors-solarized.git
+    dest=~/src-hub/dircolors-solarized

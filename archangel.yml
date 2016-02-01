@@ -1,0 +1,4 @@
+---
+- hosts: archangel
+  roles:
+    - archangel

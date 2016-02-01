@@ -1,0 +1,2 @@
+localhost ansible_connection=local
+thebeast ansible_host=aliencyb.org ansible_port=43722
