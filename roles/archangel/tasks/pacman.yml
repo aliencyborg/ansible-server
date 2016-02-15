@@ -1,13 +1,13 @@
 ---
 - name: perform full upgrade
   pacman: update_cache=yes upgrade=yes
-  tags: packages
 
 - name: install packages
   pacman: name={{ item }}
   tags: packages
   with_items:
     - ack
+    - ansible
     - ctags
     - curl
     - git

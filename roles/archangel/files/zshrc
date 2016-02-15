@@ -72,11 +72,11 @@ fi
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
+
 alias bom="rm -rf bower_components && bower cache clean && bower i"
 alias gloh="git log --oneline --decorate --color | head"
 alias lh="ls -1d .??*"
+alias ls='ls --color=auto'
 alias next="git-crawl master"
 alias nom="rm -rf node_modules && npm cache clean && npm i"
 alias nombom="nom && bom"

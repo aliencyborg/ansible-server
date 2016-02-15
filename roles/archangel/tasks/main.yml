@@ -1,6 +1,11 @@
 ---
 - include: pacman.yml
+  become: yes
+  become_user: root
+
 - include: user.yml
+  become: yes
+  become_user: root
 
 - include: zsh.yml
   become: yes
