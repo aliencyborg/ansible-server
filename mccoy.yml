@@ -1,4 +1,7 @@
 ---
 - hosts: mccoy
+  remote_user: vagrant
+  become: yes
+  become_user: root
   roles:
     - thebeast
