@@ -2,10 +2,14 @@
 - name: clone oh-my-zsh
   git: repo=https://github.com/robbyrussell/oh-my-zsh.git
     dest=~/.oh-my-zsh
+    update=no
 
 - name: copy zshrc to user home
-  copy: src=zshrc dest=~/.zshrc
+  copy: src=zshrc
+    dest=~/.zshrc
+    force=no
 
 - name: clone dircolors-solarized
   git: repo=https://github.com/seebi/dircolors-solarized.git
     dest=~/src-hub/dircolors-solarized
+    update=no

@@ -1,4 +1,9 @@
 ---
-- include: pacman.yml
+- include: docker.yml
   become: yes
   become_user: root
+
+- include: nginx-proxy.yml
+  become: yes
+  become_user: root
+

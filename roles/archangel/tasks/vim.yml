@@ -8,7 +8,8 @@
   shell: cd ~/.vim && rake
 
 - name: copy vimrc.after to user home
-  copy: src=vimrc.after dest=~/.vimrc.after
+  copy: src=vimrc.after
+    dest=~/.vimrc.after
     force=no
 
 - name: ensure the .janus directory is present

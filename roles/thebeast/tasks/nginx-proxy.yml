@@ -1,0 +1,10 @@
+---
+- name: run nginx-proxy docker container
+  docker:
+    name: nginx-proxy
+    image: jwilder/nginx-proxy
+    state: started
+    expose:
+      - 80
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
