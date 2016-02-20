@@ -11,8 +11,10 @@
     - ctags
     - curl
     - git
+    - htop
     - openssh
     - ruby
+    - tmux
     - vim
     - wget
     - zsh

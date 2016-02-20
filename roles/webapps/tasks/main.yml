@@ -1,0 +1,7 @@
+---
+- include: biscuitman.yml
+  become: yes
+  become_user: root
+  tags:
+    - docker
+    - webapp

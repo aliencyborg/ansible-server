@@ -1,0 +1,10 @@
+---
+- name: pull and run biscuitman
+  docker:
+    name: biscuitman
+    image: aliencyborg/biscuitman-nginx
+    expose: 80
+    state: reloaded
+    env:
+      VIRTUAL_HOST: www.biscuitmanchicago.com
+
