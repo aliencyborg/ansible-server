@@ -1,6 +1,8 @@
 ---
 - hosts: mccoy
-  remote_user: vagrant
+  remote_user: root
   roles:
-    - archangel
-    - thebeast
+    - common
+    - metal
+    - development
+    - webserver

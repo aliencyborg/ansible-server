@@ -6,15 +6,6 @@
   pacman: name={{ item }}
   tags: packages
   with_items:
-    - ack
-    - ansible
-    - ctags
-    - curl
-    - git
-    - htop
-    - openssh
+    - dos2unix
     - ruby
-    - tmux
-    - vim
-    - wget
     - zsh

@@ -2,6 +2,8 @@
 - hosts: thebeast
   remote_user: root
   roles:
-    - archangel
-    - thebeast
+    - common
+    - metal
+    - development
+    - webserver
     - webapps

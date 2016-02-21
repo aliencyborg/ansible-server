@@ -1,0 +1,7 @@
+---
+- name: change user shell
+  command: chsh -s /bin/zsh "{{ username }}"
+
+- name: add authorized key
+  authorized_key: user={{ username }}
+    key="{{ lookup('file', '/home/vagrant/.ssh/id_rsa.pub') }}"

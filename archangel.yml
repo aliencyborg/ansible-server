@@ -2,4 +2,7 @@
 - hosts: archangel
   remote_user: vagrant
   roles:
-    - archangel
+    - common
+    - vagrantbox
+    - development
+    - ruby
