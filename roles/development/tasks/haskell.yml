@@ -1,4 +1,9 @@
 ---
+- name: install libtinfo
+  become: yes
+  become_user: "{{ username }}"
+  include: aur.yml pkg_name=libtinfo
+
 - name: install packages
   pacman: name={{ item }}
     update_cache=yes
