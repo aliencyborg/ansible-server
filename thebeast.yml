@@ -4,6 +4,5 @@
   roles:
     - common
     - metal
-    - development
     - webserver
     - webapps

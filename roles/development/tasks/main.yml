@@ -1,16 +1,32 @@
 ---
 - include: pacman.yml
-  become: yes
-  become_user: root
 
-- include: user.yml
+- include: node.yml
   become: yes
-  become_user: root
+  become_method: sudo
+  tags:
+    - node
+
+- include: ruby.yml
+  become: yes
+  become_method: sudo
+  tags:
+    - ruby
+
+- include: haskell.yml
+  become: yes
+  become_method: sudo
+  tags:
+    - haskell
 
 - include: zsh.yml
   become: yes
   become_user: "{{ username }}"
+  tags:
+    - zsh
 
 - include: vim.yml
   become: yes
   become_user: "{{ username }}"
+  tags:
+    - vim

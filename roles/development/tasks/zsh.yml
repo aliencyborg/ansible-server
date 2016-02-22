@@ -13,3 +13,8 @@
   git: repo=https://github.com/seebi/dircolors-solarized.git
     dest=~/src-hub/dircolors-solarized
     update=no
+
+- name: change user shell
+  become: yes
+  become_user: root
+  command: chsh -s /bin/zsh "{{ username }}"

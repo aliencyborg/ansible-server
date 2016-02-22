@@ -1,6 +1,0 @@
----
-- include: ruby.yml
-  become: yes
-  become_user: root
-  tags:
-    - ruby

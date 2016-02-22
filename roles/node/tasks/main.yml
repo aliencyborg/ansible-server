@@ -1,6 +1,0 @@
----
-- include: node.yml
-  become: yes
-  become_user: root
-  tags:
-    - node

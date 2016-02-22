@@ -4,5 +4,3 @@
   roles:
     - common
     - development
-    - node
-    - ruby

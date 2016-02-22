@@ -3,6 +3,4 @@
   remote_user: root
   roles:
     - common
-    - metal
-    - development
     - webserver

@@ -1,11 +1,26 @@
 ---
 - name: perform full upgrade
+  become: yes
+  become_method: sudo
   pacman: update_cache=yes upgrade=yes
 
 - name: install packages
+  become: yes
+  become_method: sudo
   pacman: name={{ item }}
   with_items:
     - dos2unix
     - htop
+    - python2-httplib2
     - tree
     - zsh
+
+- name: install package-query (a yaourt dependency)
+  become: yes
+  become_user: "{{ username }}"
+  include: aur.yml pkg_name=package-query
+
+- name: install yaourt
+  become: yes
+  become_user: "{{ username }}"
+  include: aur.yml pkg_name=package-query
