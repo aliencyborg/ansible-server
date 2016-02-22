@@ -4,6 +4,5 @@
 
 - name: install packages
   pacman: name={{ item }}
-  tags: packages
   with_items:
     - ruby
