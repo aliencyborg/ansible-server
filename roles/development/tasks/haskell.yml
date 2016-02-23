@@ -8,4 +8,5 @@
   pacman: name={{ item }}
     update_cache=yes
   with_items:
+    - ghc
     - stack
