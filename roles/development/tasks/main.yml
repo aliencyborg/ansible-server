@@ -30,3 +30,16 @@
   become_user: "{{ username }}"
   tags:
     - vim
+
+- include: watchman.yml
+  become: yes
+  become_user: "{{ username }}"
+  tags:
+    - watchman
+
+- include: docker.yml
+  become: yes
+  become_user: root
+  tags:
+    - docker
+
