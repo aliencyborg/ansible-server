@@ -23,3 +23,10 @@
   args:
     chdir: /home/{{ username }}/src-hub/watchman
     creates: /usr/local/bin/watchman
+
+- name: increase inotify values
+  become: yes
+  become_user: root
+  copy: src=inotify
+    dest=/etc/sysctl.d/40-inotify.conf
+    force=no
