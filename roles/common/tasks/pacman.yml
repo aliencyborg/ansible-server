@@ -8,9 +8,11 @@
     - ack
     - ctags
     - curl
+    - emacs
     - git
     - htop
     - openssh
+    - reflector
     - tmux
     - vim
     - wget
