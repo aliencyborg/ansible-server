@@ -5,9 +5,13 @@
   with_items:
     - nodejs
     - npm
+    - phantomjs
 
 - name: install global node modules
   npm: name={{ item }} global=yes
   with_items:
     - bower
+    - httpster
+    - jscs
     - jshint
+    - npm-check-updates

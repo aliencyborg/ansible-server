@@ -1,5 +1,7 @@
 ---
 - include: pacman.yml
+  tags:
+    - packages
 
 - include: node.yml
   become: yes
@@ -43,3 +45,8 @@
   tags:
     - docker
 
+- include: emacs.yml
+  become: yes
+  become_user: "{{ username }}"
+  tags:
+    - emacs

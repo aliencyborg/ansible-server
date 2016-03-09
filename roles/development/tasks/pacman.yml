@@ -10,6 +10,7 @@
   pacman: name={{ item }}
   with_items:
     - dos2unix
+    - emacs
     - htop
     - python2-httplib2
     - tree
