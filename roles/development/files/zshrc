@@ -54,7 +54,10 @@ plugins=(git)
 
 # User configuration
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export RUBY_VERSION="2.3.0"
+export GEMPATH=$HOME/.gem/ruby/$RUBY_VERSION/bin
+
+export PATH=$HOME/bin:/usr/local/bin:$GEMPATH:$PATH
 
 source $ZSH/oh-my-zsh.sh
 
