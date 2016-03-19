@@ -1,6 +1,5 @@
 ---
 - name: AUR | get metadata from AurJson api
-  connection: local
   uri: >
     url=https://aur.archlinux.org/rpc.php?type=info&arg={{ pkg_name | mandatory }}
     return_content=yes
@@ -26,27 +25,22 @@
 
 - name: AUR | {{ pkg_name }} | download tarball
   when: version_check_result.changed
-  connection: local
   get_url: >
     url='https://aur.archlinux.org{{ api_info.json.results.URLPath }}'
     dest='/tmp/'
   register: aur_tarball
 
-- name: AUR | {{ pkg_name }} | upload tarball to host and extract it
-  become: yes
-  become_method: sudo
-  become_user: "{{ username }}"
+- name: AUR | {{ pkg_name }} | extract tarball
   when: version_check_result.changed
   unarchive: >
+    copy=no
     src={{ aur_tarball.dest }}
     dest=/tmp/
   register: extracted_pkg
 
-# This will break if run as root. Set user to use with makepkg with 'makepkg_user' var
+## This will break if run as root. Set user to use with makepkg with 'makepkg_user' var
 - name: AUR | {{ pkg_name }} | build package, including missing dependencies
   when: extracted_pkg | changed
-  become: yes
-  become_method: sudo
   become_user: "{{ username }}"
   command: >
     makepkg --noconfirm --noprogressbar -mfs

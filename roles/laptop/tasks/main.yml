@@ -1,0 +1,4 @@
+---
+- include: pacman.yml
+  tags:
+    - packages

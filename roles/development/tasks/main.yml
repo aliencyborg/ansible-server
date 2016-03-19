@@ -1,5 +1,7 @@
 ---
 - include: pacman.yml
+  become: yes
+  become_method: sudo
   tags:
     - packages
 
@@ -22,19 +24,16 @@
     - haskell
 
 - include: zsh.yml
-  become: yes
   become_user: "{{ username }}"
   tags:
     - zsh
 
 - include: vim.yml
-  become: yes
   become_user: "{{ username }}"
   tags:
     - vim
 
 - include: watchman.yml
-  become: yes
   become_user: "{{ username }}"
   tags:
     - watchman
@@ -46,7 +45,6 @@
     - docker
 
 - include: emacs.yml
-  become: yes
   become_user: "{{ username }}"
   tags:
     - emacs

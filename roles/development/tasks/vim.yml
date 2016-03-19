@@ -1,4 +1,17 @@
 ---
+- name: check if .vim exists
+  stat: path=~/.vim
+  register: vim_dir
+
+- name: check if .vim is a git repo
+  when: vim_dir.stat.exists
+  stat: path=~/.vim/.git
+  register: vim_git
+
+- name: backup .vim if it's not a repo
+  when: (vim_dir.stat.exists and vim_git.stat.isdir is not defined)
+  command: mv ~/.vim ~/.vim.backup
+
 - name: clone janus
   git: repo=https://github.com/carlhuda/janus.git
     dest=~/.vim

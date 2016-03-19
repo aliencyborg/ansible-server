@@ -1,0 +1,5 @@
+---
+ansible_python_interpreter: /usr/bin/python2
+username: brosas
+#userpasswd: $6$eEnlCIf6Ldw$mNV2U37NP2syp/I8042FaWOvS.DxcJSYRq3Zw9l8dTEBPxRx.1mQVLTB5N1vO/E40oXcGMli9pXKSksUlnIB9/
+userpasswd: $1$Dumk2TJT$VDje0trMK1wv0N0D1HzAC1
