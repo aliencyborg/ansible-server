@@ -12,8 +12,9 @@
     - tree
     - zsh
 
-- name: install package-query (a yaourt dependency)
-  include: aur.yml pkg_name=package-query
-
-- name: install yaourt
-  include: aur.yml pkg_name=yaourt
+- name: install aur packages
+  include: aur.yml pkg_name={{ item }}
+  with_items:
+    - aws-cli
+    - package-query
+    - yaourt
