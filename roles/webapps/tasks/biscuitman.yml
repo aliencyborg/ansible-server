@@ -7,5 +7,5 @@
     pull: always
     state: reloaded
     env:
-      VIRTUAL_HOST: www.biscuitmanchicago.com
+      VIRTUAL_HOST: 'biscuitmanchicago.com,*.biscuitmanchicago.com'
 

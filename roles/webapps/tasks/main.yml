@@ -5,3 +5,10 @@
   tags:
     - docker
     - webapp
+
+- include: bombaybreakdown.yml
+  become: yes
+  become_user: root
+  tags:
+    - docker
+    - webapp

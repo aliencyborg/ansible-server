@@ -1,0 +1,11 @@
+---
+- name: pull and run bombaybreakdown
+  docker:
+    name: bombaybreakdown
+    image: aliencyborg/bombaybreakdown
+    expose: 80
+    pull: always
+    state: reloaded
+    env:
+      VIRTUAL_HOST: 'bombaybreakdownchicago.com,*.bombaybreakdownchicago.com'
+
