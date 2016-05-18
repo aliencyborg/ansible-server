@@ -2,8 +2,13 @@
 - include: docker.yml
   become: yes
   become_user: root
+  tags:
+    - docker
+    - webserver
 
 - include: nginx-proxy.yml
   become: yes
   become_user: root
-
+  tags:
+    - docker
+    - webserver

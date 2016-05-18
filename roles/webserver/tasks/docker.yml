@@ -12,6 +12,7 @@
   tags: packages
   with_items:
     - docker
+    - docker-compose
     - python2-docker-py
 
 - name: docker service

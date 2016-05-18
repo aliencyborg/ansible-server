@@ -1,13 +1,9 @@
 ---
-- name: install libtinfo
-  become: yes
-  become_user: "{{ username }}"
-  include: aur.yml pkg_name=libtinfo
-
-- name: install wkhtmltopdf-static
-  become: yes
-  become_user: "{{ username }}"
-  include: aur.yml pkg_name=wkhtmltopdf-static
+- name: install aur packages
+  include: aur.yml pkg_name={{ item }}
+  with_items:
+    - libtinfo
+    - wkhtmltopdf-static
 
 - name: install packages
   pacman: name={{ item }}

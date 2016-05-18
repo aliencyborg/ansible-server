@@ -38,7 +38,7 @@
     dest=/tmp/
   register: extracted_pkg
 
-## This will break if run as root. Set user to use with makepkg with 'makepkg_user' var
+## This will break if run as root. Set user to use.
 - name: AUR | {{ pkg_name }} | build package, including missing dependencies
   when: extracted_pkg | changed
   become_user: "{{ username }}"
