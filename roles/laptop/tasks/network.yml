@@ -2,6 +2,12 @@
 - name: enable networkd
   service: name=systemd-networkd
    enabled=yes
+   state=started
+
+- name: enable sshd
+  service: name=sshd.socket
+    enabled=yes
+    state=started
 
 - name: configure wired network adapter
   template: src=wired.network

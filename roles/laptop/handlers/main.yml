@@ -5,3 +5,5 @@
     state=restarted
   service: name=systemd-resolved
     state=restarted
+  service: name=sshd.socket
+    state=restarted
