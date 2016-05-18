@@ -1,6 +1,5 @@
+---
 - name: install packages
-  become: yes
-  become_method: sudo
   pacman: name={{ item }}
   with_items:
     - rxvt-unicode

@@ -1,0 +1,5 @@
+[Match]
+Name={{wired_adapter}}
+
+[Network]
+DHCP=yes

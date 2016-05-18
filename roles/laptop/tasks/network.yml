@@ -1,0 +1,13 @@
+---
+- name: enable networkd
+  service: name=systemd-networkd
+   enabled=yes
+
+- name: enable resolved
+  service: name=systemd-resolved
+   enabled=yes
+
+- name: configure wired network adapter
+  template: src=wired.network
+    dest=/etc/systemd/network/wired.network
+  notify: restart network

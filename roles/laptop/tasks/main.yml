@@ -1,4 +1,11 @@
 ---
 - include: pacman.yml
+  become: yes
   tags:
     - packages
+
+- include: network.yml
+  become: yes
+  tags:
+    - network
+  notify: restart network
