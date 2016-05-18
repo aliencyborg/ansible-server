@@ -6,6 +6,6 @@
 
 - include: network.yml
   become: yes
+  notify: restart network
   tags:
     - network
-  notify: restart network
