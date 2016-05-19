@@ -1,7 +1,7 @@
 ---
 - name: AUR | get metadata from AurJson api
   uri: >
-    url=https://aur.archlinux.org/rpc.php?type=info&arg={{ pkg_name | mandatory }}
+    url=https://aur.archlinux.org/rpc.php?type=info&arg={{ pkg_name }}
     return_content=yes
     timeout=6
   register: api_info
@@ -24,6 +24,7 @@
   register: version_check_result
 
 - name: AUR | {{ pkg_name }} | download tarball
+  become_user: "{{ username }}"
   when: version_check_result.changed
   get_url: >
     url='https://aur.archlinux.org{{ api_info.json.results.URLPath }}'
@@ -32,6 +33,7 @@
 
 - name: AUR | {{ pkg_name }} | extract tarball
   when: version_check_result.changed
+  become_user: "{{ username }}"
   unarchive: >
     copy=no
     src={{ aur_tarball.dest }}
@@ -50,9 +52,9 @@
 - name: AUR | {{ pkg_name }} | install newly-built aur package with pacman
   when: aur_makepkg_result | changed
   become: yes
-  become_user: root
   shell: >
     pacman --noconfirm --noprogressbar --needed -U *.pkg.tar.xz
     chdir=/tmp/{{ pkg_name }}
   register: pacman_install_result
-  changed_when: pacman_install_result.stdout is defined and pacman_install_result.stdout.find('there is nothing to do') == -1
+  changed_when: pacman_install_result.stdout is defined
+    and pacman_install_result.stdout.find('there is nothing to do') == -1

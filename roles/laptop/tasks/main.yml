@@ -9,3 +9,8 @@
   notify: restart network
   tags:
     - network
+
+- include: xmonad.yml
+  become: yes
+  tags:
+    - xmonad
