@@ -12,7 +12,6 @@
 - name: configure wired network adapter
   template: src=wired.network
     dest=/etc/systemd/network/wired.network
-  notify: restart network
 
 - name: check resolv.conf
   stat: path=/etc/resolv.conf

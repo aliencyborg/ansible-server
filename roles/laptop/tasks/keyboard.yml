@@ -1,0 +1,20 @@
+---
+- name: ensure /usr/local/share/kbd/keymaps directory exists
+  file: path=/usr/local/share/kbd/keymaps
+    state=directory
+
+- name: copy personal.map to keymaps
+  copy: src=personal.map
+    dest=/usr/local/share/kbd/keymaps/personal.map
+    force=yes
+
+- name: ensure /etc/vconsole.conf exists
+  file: path=/etc/vconsole.conf
+    state=touch
+
+- name: set keymap in vconsole.conf
+  lineinfile: dest=/etc/vconsole.conf regexp='KEYMAP'
+    line='KEYMAP=/usr/local/share/kbd/keymaps/personal.map'
+
+- name: load keymap in current session
+  command: loadkeys /usr/local/share/kbd/keymaps/personal.map

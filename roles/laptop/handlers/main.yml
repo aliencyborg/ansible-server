@@ -1,9 +1,0 @@
----
-- name: restart network
-  become: yes
-  service: name=systemd-networkd
-    state=restarted
-  service: name=systemd-resolved
-    state=restarted
-  service: name=sshd.socket
-    state=restarted

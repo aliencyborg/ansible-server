@@ -1,6 +1,16 @@
 ---
-- name: install xmonad
+- name: install packages
   pacman: name={{ item }}
+  tags:
+    - packages
   with_items:
+    - lightdm
+    - mesa-libgl
+    - xf86-video-intel
     - xmonad
     - xmonad-contrib
+    - xorg-server
+
+- name: enable lightdm
+  service: name=lightdm
+    enabled=yes
