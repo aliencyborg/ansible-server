@@ -3,3 +3,6 @@ Name={{wired_adapter}}
 
 [Network]
 DHCP=yes
+
+[DHCP]
+RouteMetric=10

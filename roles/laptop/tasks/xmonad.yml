@@ -14,3 +14,15 @@
 - name: enable lightdm
   service: name=lightdm
     enabled=yes
+
+- name: ensure the .xmonad directory is present
+  become_user: "{{ username }}"
+  file: path=~/.xmonad
+    state=directory
+
+
+- name: copy haskell.hs to user home
+  become_user: "{{ username }}"
+  copy: src=xmonad.hs
+    dest=~/.xmonad/xmonad.hs
+    force=yes

@@ -13,7 +13,8 @@
     state=touch
 
 - name: set keymap in vconsole.conf
-  lineinfile: dest=/etc/vconsole.conf regexp='KEYMAP'
+  lineinfile: dest=/etc/vconsole.conf
+    regexp='KEYMAP'
     line='KEYMAP=/usr/local/share/kbd/keymaps/personal.map'
 
 - name: load keymap in current session

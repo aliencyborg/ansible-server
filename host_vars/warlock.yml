@@ -4,3 +4,6 @@ hostname: Warlock
 username: brosas
 userpasswd: $1$Dumk2TJT$VDje0trMK1wv0N0D1HzAC1
 wired_adapter: enp0s25
+wireless_adapter: wlp3s0
+wlan_psk: 1d436eaa6e9c14979bf43791254f0ed46501c9823f74517bca0de929ddc18e0d
+wlan_ssid: aliencyborg

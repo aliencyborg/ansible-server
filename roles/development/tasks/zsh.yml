@@ -7,7 +7,7 @@
 - name: copy zshrc to user home
   copy: src=zshrc
     dest=~/.zshrc
-    force=no
+    force=yes
 
 - name: clone dircolors-solarized
   git: repo=https://github.com/seebi/dircolors-solarized.git

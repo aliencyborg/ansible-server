@@ -4,6 +4,7 @@
     - restart networkd
     - restart resolved
     - restart sshd
+    - restart wpa_supplicant
 
 - name: restart networkd
   action: service name=systemd-networkd
@@ -15,4 +16,8 @@
 
 - name: restart sshd
   action: service name=sshd.socket
+    state=restarted
+
+- name: restart wpa_supplicant
+  action: service name=wpa_supplicant@{{wireless_adapter}}
     state=restarted

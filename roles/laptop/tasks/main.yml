@@ -19,3 +19,8 @@
   become: yes
   tags:
     - keyboard
+
+- include: terminal.yml
+  become: yes
+  tags:
+    - terminal

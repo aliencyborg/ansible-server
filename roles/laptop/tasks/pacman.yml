@@ -2,4 +2,7 @@
 - name: install packages
   pacman: name={{ item }}
   with_items:
+    - accountsservice
+    - lightdm-gtk-greeter
     - rxvt-unicode
+    - wpa_supplicant

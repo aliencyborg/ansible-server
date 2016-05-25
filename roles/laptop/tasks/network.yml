@@ -13,6 +13,19 @@
   template: src=wired.network
     dest=/etc/systemd/network/wired.network
 
+- name: configure wireless network adapter
+  template: src=wireless.network
+    dest=/etc/systemd/network/wireless.network
+
+- name: configure wpa_supplicant
+  template: src=wpa_supplicant.conf
+    dest=/etc/wpa_supplicant/wpa_supplicant-{{wireless_adapter}}.conf
+
+- name: allow wpa_supplicant to update config files
+  lineinfile: dest=/etc/wpa_supplicant/wpa_supplicant.conf
+    regexp='update_config'
+    line='update_config=1'
+
 - name: check resolv.conf
   stat: path=/etc/resolv.conf
   register: resolvconf
@@ -26,3 +39,8 @@
   file: src=/run/systemd/resolve/resolv.conf
     dest=/etc/resolv.conf
     state=link
+
+- name: enable wpa_supplicant
+  service: name=wpa_supplicant@{{wireless_adapter}}
+    enabled=yes
+    state=started

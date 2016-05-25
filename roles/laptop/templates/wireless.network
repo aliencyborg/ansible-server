@@ -1,0 +1,9 @@
+[Match]
+Name={{wireless_adapter}}
+
+[Network]
+DHCP=yes
+IPv6PrivacyExtensions=true
+
+[DHCP]
+RouteMetric=20
