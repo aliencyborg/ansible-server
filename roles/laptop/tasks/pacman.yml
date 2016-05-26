@@ -3,7 +3,15 @@
   pacman: name={{ item }}
   with_items:
     - accountsservice
+    - alsa-utils
     - firefox
     - lightdm-gtk-greeter
     - rxvt-unicode
     - wpa_supplicant
+
+- name: install aur packages
+  become_user: "{{ username }}"
+  command: yaourt -S --noconfirm {{item}}
+  with_items:
+    - aws-cli
+    - google-chrome-beta

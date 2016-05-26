@@ -15,7 +15,6 @@
 - name: install aur packages
   include: aur.yml pkg_name={{ item }}
   with_items:
-    #- aws-cli
     - package-query
     - yaourt
   tags:
