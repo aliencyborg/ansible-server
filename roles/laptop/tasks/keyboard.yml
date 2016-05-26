@@ -1,4 +1,9 @@
 ---
+- name: install xmodmap
+  pacman: name=xorg-xmodmap
+  tags:
+    - packages
+
 - name: ensure /usr/local/share/kbd/keymaps directory exists
   file: path=/usr/local/share/kbd/keymaps
     state=directory
@@ -19,3 +24,9 @@
 
 - name: load keymap in current session
   command: loadkeys /usr/local/share/kbd/keymaps/personal.map
+
+- name: copy Xmodmap to user home
+  become_user: "{{ username }}"
+  copy: src=Xmodmap
+    dest=~/.Xmodmap
+    force=yes

@@ -24,3 +24,8 @@
   become: yes
   tags:
     - terminal
+
+- include: touchpad.yml
+  become: yes
+  tags:
+    - touchpad

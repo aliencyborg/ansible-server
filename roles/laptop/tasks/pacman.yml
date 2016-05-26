@@ -3,6 +3,7 @@
   pacman: name={{ item }}
   with_items:
     - accountsservice
+    - firefox
     - lightdm-gtk-greeter
     - rxvt-unicode
     - wpa_supplicant
