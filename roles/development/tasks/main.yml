@@ -5,12 +5,6 @@
   tags:
     - packages
 
-- include: node.yml
-  become: yes
-  become_method: sudo
-  tags:
-    - node
-
 - include: ruby.yml
   become: yes
   become_method: sudo
@@ -39,6 +33,11 @@
   become_user: "{{ username }}"
   tags:
     - zsh
+
+- include: node.yml
+  become_user: "{{ username }}"
+  tags:
+    - node
 
 - include: vim.yml
   become_user: "{{ username }}"
