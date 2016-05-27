@@ -50,6 +50,11 @@
     https://github.com/yosiat/oceanic-next-vim.git oceanic-next-vim
     creates=~/.janus/oceanic-next-vim
 
+- name: clone tabular submodule
+  shell: cd ~/.janus && git submodule add
+    https://github.com/godlygeek/tabular.git tabular
+    creates=~/.janus/tabular
+
 - name: clone yajs submodule
   shell: cd ~/.janus && git submodule add
     https://github.com/othree/yajs.vim.git yajs
