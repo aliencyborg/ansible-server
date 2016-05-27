@@ -1,6 +1,8 @@
 ---
 - name: perform full upgrade
   pacman: update_cache=yes upgrade=yes
+  tags:
+    - pacman
 
 - name: install packages
   pacman: name={{ item }}
@@ -16,3 +18,5 @@
     - tmux
     - vim
     - wget
+  tags:
+    - pacman

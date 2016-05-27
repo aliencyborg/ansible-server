@@ -3,6 +3,7 @@
   pacman: name=xf86-input-synaptics
   tags:
     - packages
+    - pacman
 
 - name: copy synaptics.conf to /etc/X11/xorg.conf.d
   copy: src=synaptics.conf

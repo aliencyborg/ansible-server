@@ -1,6 +1,9 @@
 ---
 - name: install sudo
   pacman: name=sudo
+  tags:
+    - packages
+    - pacman
 
 - name: create normal user
   user: name={{ username }}

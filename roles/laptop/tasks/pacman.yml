@@ -8,10 +8,13 @@
     - lightdm-gtk-greeter
     - rxvt-unicode
     - wpa_supplicant
+  tags:
+    - pacman
 
 - name: install aur packages
   become_user: "{{ username }}"
-  command: yaourt -S --noconfirm {{item}}
+  command: yaourt -S --needed --noconfirm {{item}}
   with_items:
-    - aws-cli
     - google-chrome-beta
+  tags:
+    - aur

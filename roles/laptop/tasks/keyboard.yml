@@ -3,6 +3,7 @@
   pacman: name=xorg-xmodmap
   tags:
     - packages
+    - pacman
 
 - name: ensure /usr/local/share/kbd/keymaps directory exists
   file: path=/usr/local/share/kbd/keymaps

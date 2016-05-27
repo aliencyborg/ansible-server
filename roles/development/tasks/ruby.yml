@@ -1,6 +1,8 @@
 ---
 - name: install packages
   pacman: name={{ item }}
-    update_cache=yes
   with_items:
     - ruby
+  tags:
+    - packages
+    - pacman

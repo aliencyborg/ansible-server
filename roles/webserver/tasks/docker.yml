@@ -9,7 +9,9 @@
 
 - name: install packages
   pacman: name={{ item }}
-  tags: packages
+  tags:
+    - packages
+    - pacman
   with_items:
     - docker
     - docker-compose
