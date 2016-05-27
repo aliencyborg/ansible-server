@@ -1,0 +1,54 @@
+---
+- name: ensure /var/lib/postgres directory is present
+  file: path=/var/lib/postgres
+    group=postgres
+    owner=postgres
+    state=directory
+
+- name: check if /var/lib/postgres/data exists
+  stat: path=/var/lib/postgres/data
+  register: pgdata
+
+- name: create /var/lib/postgres/data subvolume
+  shell: btrfs subvolume create /var/lib/postgres/data
+  when: pgdata.stat.exists == False
+
+- name: disable CopyOnWrite for /var/lib/postgres/data
+  shell: chattr +C /var/lib/postgres/data
+
+- name: chown postgres:postgres /var/lib/postgres/data
+  file: path=/var/lib/postgres/data
+    group=postgres
+    owner=postgres
+
+- name: install packages
+  pacman: name={{ item }}
+  with_items:
+    - postgresql
+  tags:
+    - packages
+    - pacman
+
+- name: ignore future postgres upgrades by default
+  lineinfile: dest=/etc/pacman.conf
+    regexp='^IgnorePkg = postgresql'
+    line='IgnorePkg = postgresql postgresql-libs'
+
+- name: check if /var/lib/postgres/data/base exists
+  stat: path=/var/lib/postgres/data/base
+  register: database
+
+- name: initialize database cluster
+  shell: su - postgres -c "initdb --locale $LANG -E UTF8 -D '/var/lib/postgres/data'"
+  when: database.stat.exists == False
+
+- name: enable and start postgresql service
+  service: name=postgresql
+    enabled=yes
+    state=started
+
+- name: ensure postgresql is listening on all localhost
+  lineinfile: dest=/var/lib/postgres/data/postgresql.conf
+    regexp='^listen_addresses\s*='
+    line="listen_addresses = '127.0.0.1'"
+  notify: restart postgres

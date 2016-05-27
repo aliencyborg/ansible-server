@@ -5,7 +5,7 @@
     - packages
     - pacman
 
-- name: ensure /usr/local/share/kbd/keymaps directory exists
+- name: ensure /usr/local/share/kbd/keymaps directory is present
   file: path=/usr/local/share/kbd/keymaps
     state=directory
 

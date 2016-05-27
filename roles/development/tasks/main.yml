@@ -23,6 +23,18 @@
   tags:
     - haskell
 
+- include: docker.yml
+  become: yes
+  become_user: root
+  tags:
+    - docker
+
+- include: postgres.yml
+  become: yes
+  become_user: root
+  tags:
+    - postgres
+
 - include: zsh.yml
   become_user: "{{ username }}"
   tags:
@@ -38,13 +50,12 @@
   tags:
     - watchman
 
-- include: docker.yml
-  become: yes
-  become_user: root
-  tags:
-    - docker
-
 - include: emacs.yml
   become_user: "{{ username }}"
   tags:
     - emacs
+
+- include: elixir.yml
+  become_user: "{{ username }}"
+  tags:
+    - elixir
