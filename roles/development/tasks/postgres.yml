@@ -31,7 +31,7 @@
 
 - name: ignore future postgres upgrades by default
   lineinfile: dest=/etc/pacman.conf
-    regexp='^IgnorePkg = postgresql'
+    regexp='IgnorePkg'
     line='IgnorePkg = postgresql postgresql-libs'
 
 - name: check if /var/lib/postgres/data/base exists
