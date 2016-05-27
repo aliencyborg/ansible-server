@@ -5,6 +5,7 @@
     - packages
     - pacman
   with_items:
+    - dmenu
     - lightdm
     - mesa-libgl
     - xf86-video-intel
