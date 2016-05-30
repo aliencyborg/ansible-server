@@ -1,0 +1,49 @@
+---
+- name: cooperage postgres data container
+  docker:
+    name: cooperage-db-data
+    image: postgres:9.4
+    state: present
+
+- name: cooperage postgres
+  docker:
+    name: cooperage-db
+    image: postgres:9.4
+    state: started
+    volumes_from:
+      - cooperage-db-data
+    env:
+      POSTGRES_DB: cooperage_prod
+      POSTGRES_PASSWORD: cooperage_prod
+      POSTGRES_USER: cooperage_prod
+
+- name: cooperage api
+  docker:
+    name: cooperage-api
+    image: aliencyborg/cooperage-api:latest
+    pull: always
+    state: reloaded
+    expose: 80
+    links:
+      - cooperage-db
+    env:
+      DB_HOST: cooperage-db
+      DB_PASSWORD: cooperage_prod
+      DB_PORT: 5432
+      DB_USER: cooperage_prod
+      MIX_ENV: prod
+      PORT: 80
+      POSTGRES_DB: cooperage_prod
+      SECRET_KEY_BASE: \
+        H7ptVvyo/3P16TSk+G5ck8I3YR9VPnahUr6GjySiuCgoKA5WqYbMC0HxI0eoI5po
+      VIRTUAL_HOST: 'api.cuperygroup.com'
+
+- name: cooperage web
+  docker:
+    name: cooperage-web
+    image: aliencyborg/cooperage-web
+    expose: 80
+    pull: always
+    state: reloaded
+    env:
+      VIRTUAL_HOST: 'test.cuperygroup.com'

@@ -3,6 +3,7 @@
   become: yes
   become_user: root
   tags:
+    - biscuitman
     - docker
     - webapp
 
@@ -10,5 +11,14 @@
   become: yes
   become_user: root
   tags:
+    - bombaybreakdown
+    - docker
+    - webapp
+
+- include: cooperage.yml
+  become: yes
+  become_user: root
+  tags:
+    - cooperage
     - docker
     - webapp
