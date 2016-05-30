@@ -5,6 +5,7 @@
   pacman: name={{ item }}
   with_items:
     - elixir
+    - inotify-tools
   tags:
     - packages
     - pacman

@@ -12,6 +12,7 @@
     - xmonad
     - xmonad-contrib
     - xorg-server
+    - xorg-xlsfonts
 
 - name: enable lightdm
   service: name=lightdm

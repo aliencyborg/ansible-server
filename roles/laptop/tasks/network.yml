@@ -1,4 +1,13 @@
 ---
+- name: install packages
+  pacman: name={{ item }}
+  with_items:
+    - iw
+    - wpa_supplicant
+  tags:
+    - packages
+    - pacman
+
 - name: enable networkd
   service: name=systemd-networkd
    enabled=yes

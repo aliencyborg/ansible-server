@@ -1,6 +1,7 @@
 ---
 ansible_python_interpreter: /usr/bin/python2
 hostname: Warlock
+usb_adapter: enp0s20u6
 username: brosas
 userpasswd: $1$Dumk2TJT$VDje0trMK1wv0N0D1HzAC1
 wired_adapter: enp0s25

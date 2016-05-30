@@ -1,0 +1,8 @@
+[Match]
+Name={{usb_adapter}}
+
+[Network]
+DHCP=yes
+
+[DHCP]
+RouteMetric=30

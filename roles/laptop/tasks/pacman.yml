@@ -3,11 +3,12 @@
   pacman: name={{ item }}
   with_items:
     - accountsservice
+    - alsa-firmware
     - alsa-utils
     - firefox
     - lightdm-gtk-greeter
+    - pgadmin3
     - rxvt-unicode
-    - wpa_supplicant
   tags:
     - pacman
 
