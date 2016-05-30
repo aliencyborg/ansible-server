@@ -1,0 +1,35 @@
+---
+- name: ensure the nginx-certs directory is present
+  file: path=~/nginx-certs
+    state=directory
+
+- name: ensure the nginx-conf directory is present
+  file: path=~/nginx-conf
+    state=directory
+
+- name: ensure the nginx-templates directory is present
+  file: path=~/nginx-templates
+    state=directory
+
+- name: copy default.conf to nginx-conf
+  copy: src=default.conf
+    dest=~/nginx-conf/
+    force=yes
+
+- name: copy nginx.tmpl to nginx-templates
+  copy: src=nginx.tmpl
+    dest=~/nginx-templates/
+    force=yes
+
+- name: run nginx docker container
+  command: "docker run -d -p 80:80 --name nginx
+    -v ~/nginx-conf:/etc/nginx/conf.d -t nginx"
+
+- name: run docker-gen container
+  command: "docker run -d --name docker-gen --volumes-from nginx
+  -v /var/run/docker.sock:/tmp/docker.sock:ro
+  -v ~/nginx-templates:/etc/docker-gen/templates
+  -v ~/nginx-certs:/etc/nginx/certs
+  -t jwilder/docker-gen -notify-sighup nginx -watch -only-exposed
+  /etc/docker-gen/templates/nginx.tmpl
+  /etc/nginx/conf.d/default.conf"
