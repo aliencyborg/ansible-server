@@ -1,12 +1,8 @@
 ---
 - include: user.yml
-  become: yes
-  become_method: sudo
   tags:
     - user
 
 - include: host.yml
-  become: yes
-  become_method: sudo
   tags:
     - host
