@@ -34,6 +34,8 @@
 #define   very_light_grey    #cccccc
 #define   white              #ffffff
 
+URxvt.font: xft:DejaVu Sans Mono:pixelsize=16:antialias=true:hinting=true
+
 URxvt.colorBD:             deep_pink
 URxvt.colorIT:             lime
 URxvt.colorUL:             aqua
