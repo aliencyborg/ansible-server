@@ -29,4 +29,4 @@
   become_user: root
   copy: src=inotify
     dest=/etc/sysctl.d/40-inotify.conf
-    force=no
+    force=yes
