@@ -64,12 +64,15 @@ export ARCHFLAGS="-arch x86_64"
 export DIRCOLORS="$HOME/src-hub/dircolors-solarized/dircolors.ansi-light"
 export EDITOR='vim'
 export LANG=en_US.UTF-8
+export NVM_DIR="$HOME/.nvm"
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 export VISUAL='vim'
 
 if test -f $DIRCOLORS ; then
   eval `dircolors -b $DIRCOLORS`
 fi
+
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -84,5 +87,6 @@ alias next="git-crawl master"
 alias nom="rm -rf node_modules && npm cache clean && npm i"
 alias nombom="nom && bom"
 alias ohmyzsh="vim ~/.oh-my-zsh"
+alias ssh='TERM=xterm ssh'
 alias zomg="git add . && git stash && git stash drop"
 alias zshconfig="vim ~/.zshrc"
