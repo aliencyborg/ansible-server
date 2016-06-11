@@ -11,4 +11,5 @@
   become_user: root
   tags:
     - docker
+    - nginx
     - webserver
