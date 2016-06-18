@@ -4,6 +4,7 @@
     name: nginx-proxy
     image: jwilder/nginx-proxy
     ports: 80:80
-    state: started
+    pull: always
+    state: reloaded
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
