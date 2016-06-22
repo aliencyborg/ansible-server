@@ -16,6 +16,7 @@
     - openssh
     - reflector
     - tmux
+    - unzip
     - vim
     - wget
   tags:

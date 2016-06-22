@@ -6,5 +6,5 @@ username: brosas
 userpasswd: $1$Dumk2TJT$VDje0trMK1wv0N0D1HzAC1
 wired_adapter: enp0s25
 wireless_adapter: wlp3s0
-wlan_psk: 1d436eaa6e9c14979bf43791254f0ed46501c9823f74517bca0de929ddc18e0d
-wlan_ssid: aliencyborg
+wlan_psk: 3601d3e835a86b88ae79eacc456fe2d71e29997301ea7306a18539239a3afa19
+wlan_ssid: aliencyborg-5G
