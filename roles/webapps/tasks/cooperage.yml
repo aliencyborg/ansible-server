@@ -41,7 +41,7 @@
 - name: cooperage web
   docker:
     name: cooperage-web
-    image: aliencyborg/cooperage-web
+    image: aliencyborg/cooperage-web:latest
     expose: 80
     pull: always
     state: reloaded
