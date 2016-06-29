@@ -19,3 +19,10 @@
   tags:
     - cooperage
     - webapp
+
+- include: giscography.yml
+  become: yes
+  become_user: root
+  tags:
+    - giscography
+    - webapp
