@@ -1,0 +1,22 @@
+---
+- name: install packages
+  zypper: name={{ item }}
+  with_items:
+    - aws-cli
+    - docker
+    - docker-compose
+    - dos2unix
+    - emacs
+    - ghc
+    - htop
+    - inotify-tools
+    - nodejs
+    - npm
+    - phantomjs
+    - postgresql
+    - ruby
+    - stack
+    - tree
+    - zsh
+  tags:
+    - packages

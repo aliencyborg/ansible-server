@@ -1,0 +1,21 @@
+set colorcolumn=80
+set exrc
+set modifiable
+set secure
+set wrap
+
+"let g:syntastic_aggregate_errors = 1
+"let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+"let g:syntastic_javascript_checkers = ['jshint']
+
+" Disable auto-comment insertion
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" Theme
+syntax enable
+set t_Co=256
+set background=dark
+"colorscheme 256-jungle
+"colorscheme Chasing_Logic
+"colorscheme OceanicNext
+colorscheme vydark
