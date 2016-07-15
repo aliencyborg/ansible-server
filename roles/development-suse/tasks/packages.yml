@@ -10,11 +10,15 @@
     - ghc
     - htop
     - inotify-tools
+    - libQt5WebKit5-devel
+    - libxml2-devel
+    - libxslt-devel
     - nodejs
     - npm
     - phantomjs
     - postgresql
     - ruby
+    - ruby-devel
     - stack
     - tree
     - zsh
