@@ -27,8 +27,10 @@
   docker:
     name: sudo-science-blog
     image: ghost
+    expose: 2368
     links:
       sudo-science-db
+    ports: 80:2368
     state: reloaded
     volumes_from:
       - sudo-science-blog-data
