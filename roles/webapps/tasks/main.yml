@@ -26,3 +26,10 @@
   tags:
     - giscography
     - webapp
+
+- include: sudo-science.yml
+  become: yes
+  become_user: root
+  tags:
+    - sudoscience
+    - webapp

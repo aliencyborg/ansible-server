@@ -1,0 +1,45 @@
+---
+- name: sudo-science postgres data container
+  docker:
+    name: sudo-science-db-data
+    image: postgres:9.6
+    state: present
+
+- name: sudo-science postgres
+  docker:
+    name: sudo-science-db
+    image: postgres:9.6
+    state: started
+    volumes_from:
+      - sudo-science-db-data
+    env:
+      POSTGRES_DB: sudoscience
+      POSTGRES_PASSWORD: sudoscience
+      POSTGRES_USER: sudoscience
+
+- name: sudo-science blog data container
+  docker:
+    name: sudo-science-blog-data
+    image: aliencyborg/ghost-data
+    state: present
+
+- name: sudo-science blog
+  docker:
+    name: sudo-science-blog
+    image: ghost
+    links:
+      sudo-science-db
+    state: reloaded
+    volumes_from:
+      - sudo-science-blog-data
+    env:
+      DB_CLIENT: postgresql
+      DB_DATABASE: sudoscience
+      DB_HOST: sudo-science-db
+      DB_PASSWORD: sudoscience
+      DB_PORT: 5432
+      DB_USER: sudoscience
+      NODE_ENV: production
+      URL: http://sudo-science.com
+      VIRTUAL_HOST: 'sudo-science.com,*.sudo-science.com'
+
