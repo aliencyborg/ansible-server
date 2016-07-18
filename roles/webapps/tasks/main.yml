@@ -33,3 +33,10 @@
   tags:
     - sudoscience
     - webapp
+
+- include: afsheen-fatemi.yml
+  become: yes
+  become_user: root
+  tags:
+    - afsheenfatemi
+    - webapp

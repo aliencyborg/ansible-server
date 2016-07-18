@@ -1,0 +1,47 @@
+---
+- name: afsheen-fatemi postgres data container
+  docker:
+    name: afsheen-fatemi-db-data
+    image: postgres:9.6
+    state: present
+
+- name: afsheen-fatemi postgres
+  docker:
+    name: afsheen-fatemi-db
+    image: postgres:9.6
+    state: started
+    volumes_from:
+      - afsheen-fatemi-db-data
+    env:
+      POSTGRES_DB: afsheenfatemi
+      POSTGRES_PASSWORD: afsheenfatemi
+      POSTGRES_USER: afsheenfatemi
+
+- name: afsheen-fatemi blog data container
+  docker:
+    name: afsheen-fatemi-blog-data
+    image: aliencyborg/ghost-data
+    state: present
+
+- name: afsheen-fatemi blog
+  docker:
+    name: afsheen-fatemi-blog
+    image: ghost
+    expose: 2368
+    links:
+      afsheen-fatemi-db
+    ports: 80:2368
+    state: reloaded
+    volumes_from:
+      - afsheen-fatemi-blog-data
+    env:
+      DB_CLIENT: postgresql
+      DB_DATABASE: afsheenfatemi
+      DB_HOST: afsheen-fatemi-db
+      DB_PASSWORD: afsheenfatemi
+      DB_PORT: 5432
+      DB_USER: afsheenfatemi
+      NODE_ENV: production
+      URL: http://blog.afsheenfatemi.com
+      VIRTUAL_HOST: 'blog.afsheenfatemi.com,*.afsheenfatemi.com'
+
