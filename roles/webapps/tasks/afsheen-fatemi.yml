@@ -21,6 +21,7 @@
   docker:
     name: afsheen-fatemi-blog-data
     image: aliencyborg/ghost-data
+    pull: always
     state: present
 
 - name: afsheen-fatemi blog

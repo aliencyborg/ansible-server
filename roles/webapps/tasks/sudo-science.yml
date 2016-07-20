@@ -21,6 +21,7 @@
   docker:
     name: sudo-science-blog-data
     image: aliencyborg/ghost-data
+    pull: always
     state: present
 
 - name: sudo-science blog
