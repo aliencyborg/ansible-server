@@ -30,7 +30,6 @@
     expose: 2368
     links:
       afsheen-fatemi-db
-    ports: 80:2368
     state: reloaded
     volumes_from:
       - afsheen-fatemi-blog-data
