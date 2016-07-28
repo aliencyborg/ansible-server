@@ -42,3 +42,10 @@
     - afsheenfatemi
     - ghost
     - webapp
+
+- include: wastenot.yml
+  become: yes
+  become_user: root
+  tags:
+    - wastenot
+    - webapp

@@ -1,0 +1,11 @@
+---
+- name: pull and run bombaybreakdow
+  docker:
+    name: wastenot
+    image: aliencyborg/wastenot
+    expose: 80
+    pull: always
+    state: reloaded
+    env:
+      VIRTUAL_HOST: 'wastenot.such.website'
+
