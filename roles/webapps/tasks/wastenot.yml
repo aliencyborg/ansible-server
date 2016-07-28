@@ -1,11 +1,49 @@
 ---
-- name: pull and run bombaybreakdow
+- name: wastenot postgres data container
   docker:
-    name: wastenot
-    image: aliencyborg/wastenot
+    name: wastenot-db-data
+    image: postgres:9.5
+    state: present
+
+- name: wastenot postgres
+  docker:
+    name: wastenot-db
+    image: postgres:9.5
+    state: started
+    volumes_from:
+      - wastenot-db-data
+    env:
+      POSTGRES_DB: wastenot_prod
+      POSTGRES_PASSWORD: wastenot_prod
+      POSTGRES_USER: wastenot_prod
+
+- name: wastenot api
+  docker:
+    name: wastenot-api
+    image: aliencyborg/wastenot-api:latest
+    pull: always
+    state: reloaded
+    expose: 80
+    links:
+      - wastenot-db
+    env:
+      DB_HOST: wastenot-db
+      DB_PASSWORD: wastenot_prod
+      DB_PORT: 5432
+      DB_USER: wastenot_prod
+      MIX_ENV: prod
+      PORT: 80
+      POSTGRES_DB: wastenot_prod
+      SECRET_KEY_BASE: \
+        MenagNznWdCpn3T0+V7VELazp71cx2MIyctOmgJ5x15BkLSO8GhMu666d2DpJX7t
+      VIRTUAL_HOST: 'api.wastenotcompost.com'
+
+- name: wastenot web
+  docker:
+    name: wastenot-web
+    image: aliencyborg/wastenot-web:latest
     expose: 80
     pull: always
     state: reloaded
     env:
-      VIRTUAL_HOST: 'wastenot.such.website'
-
+      VIRTUAL_HOST: 'test.wastenotcompost.com'
