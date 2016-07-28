@@ -1,5 +1,5 @@
 ---
-- name: pull and run bombaybreakdow
+- name: pull and run wastenot
   docker:
     name: wastenot
     image: aliencyborg/wastenot
