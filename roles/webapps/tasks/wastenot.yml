@@ -46,4 +46,4 @@
     pull: always
     state: reloaded
     env:
-      VIRTUAL_HOST: 'test.wastenotcompost.com'
+      VIRTUAL_HOST: 'wastenotcompost.com,www.wastenotcompost.com'
