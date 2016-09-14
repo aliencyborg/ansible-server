@@ -49,3 +49,10 @@
   tags:
     - wastenot
     - webapp
+
+- include: mwmocing.yml
+  become: yes
+  become_user: root
+  tags:
+    - mwmoving
+    - webapp
