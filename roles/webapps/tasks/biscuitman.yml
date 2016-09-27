@@ -2,7 +2,7 @@
 - name: pull and run biscuitman
   docker:
     name: biscuitman
-    image: aliencyborg/biscuitman
+    image: aliencyborg/biscuitman-web
     expose: 80
     pull: always
     state: reloaded
