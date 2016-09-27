@@ -50,7 +50,7 @@
     - wastenot
     - webapp
 
-- include: mwmocing.yml
+- include: mwmoving.yml
   become: yes
   become_user: root
   tags:
