@@ -37,6 +37,8 @@
       SECRET_KEY_BASE: \
         H7ptVvyo/3P16TSk+G5ck8I3YR9VPnahUr6GjySiuCgoKA5WqYbMC0HxI0eoI5po
       VIRTUAL_HOST: 'api.cuperygroup.com'
+      LETSENCRYPT_HOST: 'api.cuperygroup.com'
+      LETSENCRYPT_EMAIL: 'thealiencyborg@gmail.com'
 
 - name: cooperage web
   docker:
@@ -47,3 +49,5 @@
     state: reloaded
     env:
       VIRTUAL_HOST: 'test.cuperygroup.com'
+      LETSENCRYPT_HOST: 'test.cuperygroup.com'
+      LETSENCRYPT_EMAIL: 'thealiencyborg@gmail.com'

@@ -4,55 +4,62 @@
   become_user: root
   tags:
     - biscuitman
-    - webapp
+    - webapps
 
 - include: bombaybreakdown.yml
   become: yes
   become_user: root
   tags:
     - bombaybreakdown
-    - webapp
+    - webapps
 
-- include: cooperage.yml
+- include: tilltax.yml
   become: yes
   become_user: root
   tags:
-    - cooperage
-    - webapp
-
-- include: giscography.yml
-  become: yes
-  become_user: root
-  tags:
-    - giscography
-    - webapp
-
-- include: sudo-science.yml
-  become: yes
-  become_user: root
-  tags:
-    - sudoscience
-    - ghost
-    - webapp
-
-- include: afsheen-fatemi.yml
-  become: yes
-  become_user: root
-  tags:
-    - afsheenfatemi
-    - ghost
-    - webapp
+    - tilltax
+    - webapps
 
 - include: wastenot.yml
   become: yes
   become_user: root
   tags:
     - wastenot
-    - webapp
+    - webapps
 
 - include: mwmoving.yml
   become: yes
   become_user: root
   tags:
     - mwmoving
-    - webapp
+    - webapps
+
+#- include: cooperage.yml
+  #become: yes
+  #become_user: root
+  #tags:
+    #- cooperage
+    #- webapps
+
+#- include: giscography.yml
+  #become: yes
+  #become_user: root
+  #tags:
+    #- giscography
+    #- webapps
+
+#- include: sudo-science.yml
+  #become: yes
+  #become_user: root
+  #tags:
+    #- sudoscience
+    #- ghost
+    #- webapps
+
+#- include: afsheen-fatemi.yml
+  #become: yes
+  #become_user: root
+  #tags:
+    #- afsheenfatemi
+    #- ghost
+    #- webapps

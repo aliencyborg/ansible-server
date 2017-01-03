@@ -43,5 +43,6 @@
       DB_USER: sudoscience
       NODE_ENV: production
       URL: http://sudo-science.com
-      VIRTUAL_HOST: 'sudo-science.com,*.sudo-science.com'
-
+      VIRTUAL_HOST: 'sudo-science.com,www.sudo-science.com'
+      LETSENCRYPT_HOST: 'sudo-science.com,www.sudo-science.com'
+      LETSENCRYPT_EMAIL: 'thealiencyborg@gmail.com'

@@ -13,6 +13,7 @@
     - emacs
     - git
     - htop
+    - jnettop
     - openssh
     - reflector
     - tmux

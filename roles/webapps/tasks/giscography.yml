@@ -7,4 +7,6 @@
     pull: always
     state: reloaded
     env:
-      VIRTUAL_HOST: 'giscography.com,*.giscography.com'
+      VIRTUAL_HOST: 'giscography.com,www.giscography.com'
+      LETSENCRYPT_HOST: 'giscography.com,www.giscography.com'
+      LETSENCRYPT_EMAIL: 'thealiencyborg@gmail.com'

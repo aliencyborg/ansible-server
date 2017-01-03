@@ -6,7 +6,28 @@
     - docker
     - webserver
 
-- include: nginx-proxy.yml
+- include: nginx-public.yml
+  become: yes
+  become_user: root
+  tags:
+    - nginx
+    - webserver
+
+- include: remove-docker-gen.yml
+  become: yes
+  become_user: root
+  tags:
+    - nginx
+    - webserver
+
+- include: docker-gen.yml
+  become: yes
+  become_user: root
+  tags:
+    - nginx
+    - webserver
+
+- include: nginx-letsencrypt.yml
   become: yes
   become_user: root
   tags:

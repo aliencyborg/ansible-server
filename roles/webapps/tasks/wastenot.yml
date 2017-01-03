@@ -1,12 +1,12 @@
 ---
 - name: wastenot postgres data container
-  docker:
+  docker_container:
     name: wastenot-db-data
     image: postgres:9.5
     state: present
 
 - name: wastenot postgres
-  docker:
+  docker_container:
     name: wastenot-db
     image: postgres:9.5
     state: started
@@ -18,12 +18,12 @@
       POSTGRES_USER: wastenot_prod
 
 - name: wastenot api
-  docker:
+  docker_container:
     name: wastenot-api
-    image: aliencyborg/wastenot-api:latest
-    pull: always
-    state: reloaded
-    expose: 80
+    image: aliencyborg/wastenot-api
+    pull: true
+    state: started
+    restart: yes
     links:
       - wastenot-db
     env:
@@ -39,11 +39,11 @@
       VIRTUAL_HOST: 'api.wastenotcompost.com'
 
 - name: wastenot web
-  docker:
+  docker_container:
     name: wastenot-web
-    image: aliencyborg/wastenot-web:latest
-    expose: 80
-    pull: always
-    state: reloaded
+    image: aliencyborg/wastenot-web
+    pull: true
+    state: started
+    restart: yes
     env:
       VIRTUAL_HOST: 'wastenotcompost.com,www.wastenotcompost.com'

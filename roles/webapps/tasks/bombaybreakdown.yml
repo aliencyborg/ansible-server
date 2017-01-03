@@ -1,11 +1,12 @@
 ---
 - name: pull and run bombaybreakdown
-  docker:
+  docker_container:
     name: bombaybreakdown
     image: aliencyborg/bombaybreakdown
-    expose: 80
-    pull: always
-    state: reloaded
+    pull: true
+    state: started
+    restart: yes
     env:
-      VIRTUAL_HOST: 'bombaybreakdown.com,*.bombaybreakdown.com'
-
+      LETSENCRYPT_EMAIL: 'thealiencyborg@gmail.com'
+      LETSENCRYPT_HOST: 'bombaybreakdown.com,www.bombaybreakdown.com'
+      VIRTUAL_HOST: 'bombaybreakdown.com,www.bombaybreakdown.com'
