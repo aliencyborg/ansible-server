@@ -1,0 +1,5 @@
+---
+- name: remove docker-gen container
+  docker_container:
+    name: docker-gen
+    state: absent
