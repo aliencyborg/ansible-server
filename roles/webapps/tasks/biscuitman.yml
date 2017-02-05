@@ -10,13 +10,3 @@
       LETSENCRYPT_EMAIL: 'thealiencyborg@gmail.com'
       LETSENCRYPT_HOST: 'biscuitmanchicago.com,www.biscuitmanchicago.com'
       VIRTUAL_HOST: 'biscuitmanchicago.com,www.biscuitmanchicago.com'
-
-- name: pull and run biscuitman-test
-  docker_container:
-    name: biscuitman-test
-    image: aliencyborg/biscuitman-test
-    pull: true
-    state: started
-    restart: yes
-    env:
-      VIRTUAL_HOST: 'bm.aliencyb.org'

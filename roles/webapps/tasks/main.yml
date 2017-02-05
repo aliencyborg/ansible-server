@@ -20,11 +20,20 @@
     - tilltax
     - webapps
 
-- include: wastenot.yml
+- include: wastenot-api.yml
   become: yes
   become_user: root
   tags:
     - wastenot
+    - wastenot-api
+    - webapps
+
+- include: wastenot-web.yml
+  become: yes
+  become_user: root
+  tags:
+    - wastenot
+    - wastenot-web
     - webapps
 
 - include: mwmoving.yml
