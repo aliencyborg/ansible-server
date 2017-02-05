@@ -11,7 +11,7 @@
   docker_container:
     name: sudo-science-content
     image: aliencyborg/ghost-content
-    pull: always
+    pull: yes
     state: present
 
 - name: sudo-science data container
@@ -24,7 +24,7 @@
 
 - name: sudo-science db
   docker_container:
-    env_file: .env
+    env_file: sudo-science.env
     image: mariadb:10.1
     name: sudo-science-db
     state: started
@@ -34,17 +34,17 @@
 
 - name: sudo-science web
   docker_container:
-    env_file: .env
+    env_file: sudo-science.env
     expose: 2368
     image: ghost:0.11.4
     name: sudo-science-web
     restart: yes
     state: started
     env:
-      VIRTUAL_HOST: 'sudo-science.com,www.sudo-science.com'
-      LETSENCRYPT_HOST: 'sudo-science.com,www.sudo-science.com'
-      LETSENCRYPT_EMAIL: 'thealiencyborg@gmail.com'
+      VIRTUAL_HOST: "sudo-science.com,www.sudo-science.com"
+      LETSENCRYPT_HOST: "sudo-science.com,www.sudo-science.com"
+      LETSENCRYPT_EMAIL: "thealiencyborg@gmail.com"
     links:
-      sudo-science-db
+      - "sudo-science-db:mysql"
     volumes_from:
       - sudo-science-content

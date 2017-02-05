@@ -13,6 +13,14 @@
     - bombaybreakdown
     - webapps
 
+- include: sudo-science.yml
+  become: yes
+  become_user: root
+  tags:
+    - sudoscience
+    - ghost
+    - webapps
+
 - include: tilltax.yml
   become: yes
   become_user: root
@@ -55,14 +63,6 @@
   #become_user: root
   #tags:
     #- giscography
-    #- webapps
-
-#- include: sudo-science.yml
-  #become: yes
-  #become_user: root
-  #tags:
-    #- sudoscience
-    #- ghost
     #- webapps
 
 #- include: afsheen-fatemi.yml
