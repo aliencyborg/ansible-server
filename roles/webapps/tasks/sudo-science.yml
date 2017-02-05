@@ -1,48 +1,50 @@
 ---
-- name: sudo-science postgres data container
-  docker:
-    name: sudo-science-db-data
-    image: postgres:9.6
+- name: sudo-science backups container
+  docker_container:
+    image: mariadb:10.1
+    name: sudo-science-db-backups
     state: present
+    volumes:
+      - /backups
 
-- name: sudo-science postgres
-  docker:
-    name: sudo-science-db
-    image: postgres:9.6
-    state: started
-    volumes_from:
-      - sudo-science-db-data
-    env:
-      POSTGRES_DB: sudoscience
-      POSTGRES_PASSWORD: sudoscience
-      POSTGRES_USER: sudoscience
-
-- name: sudo-science blog data container
-  docker:
-    name: sudo-science-blog-data
-    image: aliencyborg/ghost-data
+- name: sudo-science content container
+  docker_container:
+    name: sudo-science-content
+    image: aliencyborg/ghost-content
     pull: always
     state: present
 
-- name: sudo-science blog
-  docker:
-    name: sudo-science-blog
-    image: ghost
-    expose: 2368
-    links:
-      sudo-science-db
-    state: reloaded
+- name: sudo-science data container
+  docker_container:
+    image: mariadb:10.1
+    name: sudo-science-db-data
+    state: present
+    volumes:
+      - /var/lib/mysql
+
+- name: sudo-science db
+  docker_container:
+    env_file: .env
+    image: mariadb:10.1
+    name: sudo-science-db
+    state: started
     volumes_from:
-      - sudo-science-blog-data
+      - sudo-science-db-backups
+      - sudo-science-db-data
+
+- name: sudo-science web
+  docker_container:
+    env_file: .env
+    expose: 2368
+    image: ghost:0.11.4
+    name: sudo-science-web
+    restart: yes
+    state: started
     env:
-      DB_CLIENT: postgresql
-      DB_DATABASE: sudoscience
-      DB_HOST: sudo-science-db
-      DB_PASSWORD: sudoscience
-      DB_PORT: 5432
-      DB_USER: sudoscience
-      NODE_ENV: production
-      URL: http://sudo-science.com
       VIRTUAL_HOST: 'sudo-science.com,www.sudo-science.com'
       LETSENCRYPT_HOST: 'sudo-science.com,www.sudo-science.com'
       LETSENCRYPT_EMAIL: 'thealiencyborg@gmail.com'
+    links:
+      sudo-science-db
+    volumes_from:
+      - sudo-science-content
