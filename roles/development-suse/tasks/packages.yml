@@ -2,25 +2,27 @@
 - name: install packages
   zypper: name={{ item }}
   with_items:
-    - aws-cli
+    - automake
+    - dejavu-fonts
     - docker
     - docker-compose
     - dos2unix
     - emacs
-    - ghc
+    - gcc-c++
     - htop
     - inotify-tools
-    - libQt5WebKit5-devel
     - libxml2-devel
     - libxslt-devel
     - nodejs
     - npm
-    - phantomjs
     - postgresql
+    - python-devel
     - ruby
     - ruby-devel
+    - rxvt-unicode
     - stack
     - tree
+    - xrdb
     - zsh
   tags:
     - packages
