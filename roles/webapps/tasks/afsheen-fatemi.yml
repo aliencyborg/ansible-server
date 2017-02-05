@@ -1,49 +1,50 @@
 ---
-- name: afsheen-fatemi postgres data container
-  docker:
-    name: afsheen-fatemi-db-data
-    image: postgres:9.6
+- name: afsheen-fatemi backups container
+  docker_container:
+    image: mariadb:10.1
+    name: afsheen-fatemi-db-backups
+    state: present
+    volumes:
+      - /backups
+
+- name: afsheen-fatemi content container
+  docker_container:
+    name: afsheen-fatemi-content
+    image: aliencyborg/ghost-content
+    pull: yes
     state: present
 
-- name: afsheen-fatemi postgres
-  docker:
+- name: afsheen-fatemi data container
+  docker_container:
+    image: mariadb:10.1
+    name: afsheen-fatemi-db-data
+    state: present
+    volumes:
+      - /var/lib/mysql
+
+- name: afsheen-fatemi db
+  docker_container:
+    env_file: afsheen-fatemi.env
+    image: mariadb:10.1
     name: afsheen-fatemi-db
-    image: postgres:9.6
     state: started
     volumes_from:
+      - afsheen-fatemi-db-backups
       - afsheen-fatemi-db-data
-    env:
-      POSTGRES_DB: afsheenfatemi
-      POSTGRES_PASSWORD: afsheenfatemi
-      POSTGRES_USER: afsheenfatemi
 
-- name: afsheen-fatemi blog data container
-  docker:
-    name: afsheen-fatemi-blog-data
-    image: aliencyborg/ghost-data
-    pull: always
-    state: present
-
-- name: afsheen-fatemi blog
-  docker:
-    name: afsheen-fatemi-blog
-    image: ghost
+- name: afsheen-fatemi web
+  docker_container:
+    env_file: afsheen-fatemi.env
     expose: 2368
-    links:
-      afsheen-fatemi-db
-    state: reloaded
-    volumes_from:
-      - afsheen-fatemi-blog-data
+    image: ghost:0.11.4
+    name: afsheen-fatemi-web
+    restart: yes
+    state: started
     env:
-      DB_CLIENT: postgresql
-      DB_DATABASE: afsheenfatemi
-      DB_HOST: afsheen-fatemi-db
-      DB_PASSWORD: afsheenfatemi
-      DB_PORT: 5432
-      DB_USER: afsheenfatemi
-      NODE_ENV: production
-      URL: http://blog.afsheenfatemi.com
-      VIRTUAL_HOST: 'blog.afsheenfatemi.com'
-      LETSENCRYPT_HOST: 'blog.afsheenfatemi.com'
-      LETSENCRYPT_EMAIL: 'thealiencyborg@gmail.com'
-
+      VIRTUAL_HOST: "blog.afsheenfatemi.com,www.blog.afsheenfatemi.com"
+      LETSENCRYPT_HOST: "blog.afsheenfatemi.com,www.blog.afsheenfatemi.com"
+      LETSENCRYPT_EMAIL: "thealiencyborg@gmail.com"
+    links:
+      - "afsheen-fatemi-db:mysql"
+    volumes_from:
+      - afsheen-fatemi-content

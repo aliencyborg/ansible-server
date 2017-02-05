@@ -1,4 +1,12 @@
 ---
+- include: afsheen-fatemi.yml
+  become: yes
+  become_user: root
+  tags:
+    - afsheenfatemi
+    - ghost
+    - webapps
+
 - include: biscuitman.yml
   become: yes
   become_user: root
@@ -11,6 +19,13 @@
   become_user: root
   tags:
     - bombaybreakdown
+    - webapps
+
+- include: mwmoving.yml
+  become: yes
+  become_user: root
+  tags:
+    - mwmoving
     - webapps
 
 - include: sudo-science.yml
@@ -44,31 +59,9 @@
     - wastenot-web
     - webapps
 
-- include: mwmoving.yml
-  become: yes
-  become_user: root
-  tags:
-    - mwmoving
-    - webapps
-
 #- include: cooperage.yml
   #become: yes
   #become_user: root
   #tags:
     #- cooperage
-    #- webapps
-
-#- include: giscography.yml
-  #become: yes
-  #become_user: root
-  #tags:
-    #- giscography
-    #- webapps
-
-#- include: afsheen-fatemi.yml
-  #become: yes
-  #become_user: root
-  #tags:
-    #- afsheenfatemi
-    #- ghost
     #- webapps
