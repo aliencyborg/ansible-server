@@ -10,7 +10,7 @@
 - name: sudo-science content container
   docker_container:
     name: sudo-science-content
-    image: aliencyborg/ghost-content
+    image: aliencyborg/sudo-science-content
     pull: yes
     state: present
 

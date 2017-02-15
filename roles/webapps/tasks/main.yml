@@ -36,6 +36,14 @@
     - ghost
     - webapps
 
+- include: teeming-web.yml
+  become: yes
+  become_user: root
+  tags:
+    - teeming
+    - ormn
+    - webapps
+
 - include: tilltax.yml
   become: yes
   become_user: root
