@@ -8,5 +8,5 @@
     restart: yes
     env:
       LETSENCRYPT_EMAIL: 'thealiencyborg@gmail.com'
-      LETSENCRYPT_HOST: 'ormn.prettygoodprogress.org'
-      VIRTUAL_HOST: 'ormn.prettygoodprogress.org'
+      LETSENCRYPT_HOST: 'ormn.prettygoodprogress.org,www.ormn.prettygoodprogress.org'
+      VIRTUAL_HOST: 'ormn.prettygoodprogress.org,www.ormn.prettygoodprogress.org'

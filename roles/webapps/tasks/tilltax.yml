@@ -7,4 +7,6 @@
     state: started
     restart: yes
     env:
+      LETSENCRYPT_EMAIL: 'thealiencyborg@gmail.com'
+      LETSENCRYPT_HOST: 'tilltaxtest.aliencyb.org'
       VIRTUAL_HOST: 'tilltaxtest.aliencyb.org'

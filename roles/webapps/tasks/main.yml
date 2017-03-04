@@ -1,4 +1,11 @@
 ---
+- include: aliencyborg.yml
+  become: yes
+  become_user: root
+  tags:
+    - aliencyborg
+    - webapps
+
 - include: afsheen-fatemi.yml
   become: yes
   become_user: root
@@ -36,11 +43,21 @@
     - ghost
     - webapps
 
+- include: teeming-api.yml
+  become: yes
+  become_user: root
+  tags:
+    - teeming
+    - teeming-api
+    - ormn
+    - webapps
+
 - include: teeming-web.yml
   become: yes
   become_user: root
   tags:
     - teeming
+    - teeming-web
     - ormn
     - webapps
 
