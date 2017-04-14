@@ -2,7 +2,7 @@
 - name: pull and run aliencyborg
   docker_container:
     name: aliencyborg
-    image: aliencyborg/alien-demo
+    image: aliencyborg/aliencyborg-demo
     pull: true
     state: started
     restart: yes
