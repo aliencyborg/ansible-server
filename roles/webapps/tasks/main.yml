@@ -68,6 +68,13 @@
     - tilltax
     - webapps
 
+- include: tilltax-demo.yml
+  become: yes
+  become_user: root
+  tags:
+    - tilltax-demo
+    - webapps
+
 - include: wastenot-api.yml
   become: yes
   become_user: root
