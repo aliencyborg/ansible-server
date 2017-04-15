@@ -68,10 +68,19 @@
     - tilltax
     - webapps
 
+- include: tilltax-api.yml
+  become: yes
+  become_user: root
+  tags:
+    - tilltax
+    - tilltax-api
+    - webapps
+
 - include: tilltax-demo.yml
   become: yes
   become_user: root
   tags:
+    - tilltax
     - tilltax-demo
     - webapps
 
