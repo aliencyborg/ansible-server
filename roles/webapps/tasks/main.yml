@@ -100,6 +100,14 @@
     - wastenot-web
     - webapps
 
+- include: sonic-fusion.yml
+  become: yes
+  become_user: root
+  tags:
+    - sonicfusion-demo
+    - wordpress
+    - webapps
+
 #- include: cooperage.yml
   #become: yes
   #become_user: root

@@ -7,6 +7,7 @@
 
 - name: tilltax postgres
   docker_container:
+    env_file: tilltax.env
     image: postgres:9.6
     name: tilltax-db
     state: started

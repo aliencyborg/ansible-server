@@ -1,0 +1,50 @@
+---
+- name: sonic-fusion backups container
+  docker_container:
+    image: mariadb:10.1
+    name: sonic-fusion-db-backups
+    state: present
+    volumes:
+      - /backups
+
+- name: sonic-fusion content container
+  docker_container:
+    name: sonic-fusion-content
+    image: aliencyborg/sonic-fusion-content
+    pull: yes
+    state: present
+
+- name: sonic-fusion data container
+  docker_container:
+    image: mariadb:10.1
+    name: sonic-fusion-db-data
+    state: present
+    volumes:
+      - /var/lib/mysql
+
+- name: sonic-fusion db
+  docker_container:
+    env_file: sonic-fusion.env
+    image: mariadb:10.1
+    name: sonic-fusion-db
+    state: started
+    volumes_from:
+      - sonic-fusion-db-backups
+      - sonic-fusion-db-data
+
+- name: sonic-fusion web
+  docker_container:
+    env_file: sonic-fusion.env
+    expose: 80
+    image: wordpress:4.7
+    name: sonic-fusion-wp
+    restart: yes
+    state: started
+    env:
+      VIRTUAL_HOST: "sftest.aliencyb.org"
+      LETSENCRYPT_HOST: "sftest.aliencyb.org"
+      LETSENCRYPT_EMAIL: "thealiencyborg@gmail.com"
+    links:
+      - "sonic-fusion-db:mysql"
+    volumes_from:
+      - sonic-fusion-content
