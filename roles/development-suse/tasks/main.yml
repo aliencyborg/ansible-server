@@ -25,3 +25,8 @@
   become_user: "{{ username }}"
   tags:
     - node
+
+- include: watchman.yml
+  become_user: "{{ username }}"
+  tags:
+    - watchman

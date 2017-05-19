@@ -1,0 +1,32 @@
+---
+- name: clone watchman
+  git: repo=https://github.com/facebook/watchman.git
+    dest=~/src-hub/watchman
+    update=no
+    version=v4.7.0
+
+- name: make watchman
+  command: "{{ item }}"
+  args:
+    chdir: ~/src-hub/watchman
+    creates: ~/src-hub/watchman/watchman
+  with_items:
+    - ./autogen.sh
+    - ./configure
+    - make
+
+- name: install watchman
+  become: yes
+  become_method: sudo
+  become_user: root
+  command: make install
+  args:
+    chdir: /home/{{ username }}/src-hub/watchman
+    creates: /usr/local/bin/watchman
+
+- name: increase inotify values
+  become: yes
+  become_user: root
+  copy: src=inotify
+    dest=/etc/sysctl.d/40-inotify.conf
+    force=yes
