@@ -41,8 +41,8 @@
     restart: yes
     state: started
     env:
-      VIRTUAL_HOST: "sftest.aliencyb.org"
-      LETSENCRYPT_HOST: "sftest.aliencyb.org"
+      VIRTUAL_HOST: "sonicfusionmusicfestival.com,www.sonicfusionmusicfestival.com"
+      LETSENCRYPT_HOST: "sonicfusionmusicfestival.com,www.sonicfusionmusicfestival.com"
       LETSENCRYPT_EMAIL: "thealiencyborg@gmail.com"
     links:
       - "sonic-fusion-db:mysql"

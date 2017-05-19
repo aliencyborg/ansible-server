@@ -104,7 +104,15 @@
   become: yes
   become_user: root
   tags:
-    - sonicfusion-demo
+    - sonicfusion
+    - wordpress
+    - webapps
+
+- include: biscuitpress.yml
+  become: yes
+  become_user: root
+  tags:
+    - biscuitpress
     - wordpress
     - webapps
 

@@ -1,0 +1,61 @@
+---
+- name: biscuitpress backups container
+  docker_container:
+    image: mariadb:10.1
+    name: biscuitpress-db-backups
+    state: present
+    volumes:
+      - /backups
+
+- name: biscuitpress content container
+  docker_container:
+    name: biscuitpress-content
+    image: aliencyborg/biscuitpress-content
+    pull: yes
+    state: present
+
+- name: biscuitpress data container
+  docker_container:
+    image: mariadb:10.1
+    name: biscuitpress-db-data
+    state: present
+    volumes:
+      - /var/lib/mysql
+
+- name: biscuitpress db
+  docker_container:
+    env_file: biscuitpress.env
+    image: mariadb:10.1
+    name: biscuitpress-db
+    state: started
+    volumes_from:
+      - biscuitpress-db-backups
+      - biscuitpress-db-data
+
+- name: biscuitpress web
+  docker_container:
+    env_file: biscuitpress.env
+    expose: 80
+    image: wordpress:4.7
+    name: biscuitpress-wp
+    restart: yes
+    state: started
+    env:
+      VIRTUAL_HOST: "bmpress.aliencyb.org"
+      LETSENCRYPT_HOST: "bmpress.aliencyb.org"
+      LETSENCRYPT_EMAIL: "thealiencyborg@gmail.com"
+    links:
+      - "biscuitpress-db:mysql"
+    volumes_from:
+      - biscuitpress-content
+
+- name: biscuitpress ftp
+  docker_container:
+    command: foo:pass:::upload
+    image: atmoz/sftp:latest
+    name: biscuitpress-ftp
+    state: started
+    ports:
+      - "49222:22"
+    volumes_from:
+      - biscuitpress-content
