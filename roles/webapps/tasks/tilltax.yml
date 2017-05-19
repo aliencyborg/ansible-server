@@ -1,10 +1,12 @@
 ---
-- name: pull and run tilltax-test
+- name: pull and run tilltax-web
   docker_container:
-    name: tilltax-test
+    name: tilltax-web
     image: aliencyborg/tilltax-web
     pull: true
     state: started
     restart: yes
     env:
-      VIRTUAL_HOST: 'tilltaxtest.aliencyb.org'
+      LETSENCRYPT_EMAIL: 'thealiencyborg@gmail.com'
+      LETSENCRYPT_HOST: 'tilltax.com,www.tilltax.com'
+      VIRTUAL_HOST: 'tilltax.com,www.tilltax.com'
