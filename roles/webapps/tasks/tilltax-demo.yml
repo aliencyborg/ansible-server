@@ -1,8 +1,8 @@
 ---
-- name: pull and run tilltax-test
+- name: pull and run tilltax demo
   docker_container:
-    name: tilltax-test
-    image: aliencyborg/tilltax-test
+    name: tilltax-demo
+    image: aliencyborg/tilltax-web
     pull: true
     state: started
     restart: yes
