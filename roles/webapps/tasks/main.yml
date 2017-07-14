@@ -43,6 +43,15 @@
     - ghost
     - webapps
 
+- include: teeming-rails.yml
+  become: yes
+  become_user: root
+  tags:
+    - teeming
+    - teeming-rails
+    - ormn
+    - webapps
+
 - include: teeming-api.yml
   become: yes
   become_user: root
