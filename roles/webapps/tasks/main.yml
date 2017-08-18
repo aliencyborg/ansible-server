@@ -12,13 +12,20 @@
   tags:
     - afsheenfatemi
     - ghost
-    - webapps
 
 - include: biscuitman.yml
   become: yes
   become_user: root
   tags:
     - biscuitman
+    - webapps
+
+- include: biscuitpress.yml
+  become: yes
+  become_user: root
+  tags:
+    - biscuitpress
+    - wordpress
     - webapps
 
 - include: bombaybreakdown.yml
@@ -43,15 +50,6 @@
     - ghost
     - webapps
 
-- include: teeming-rails.yml
-  become: yes
-  become_user: root
-  tags:
-    - teeming
-    - teeming-rails
-    - ormn
-    - webapps
-
 - include: teeming-api.yml
   become: yes
   become_user: root
@@ -70,21 +68,6 @@
     - ormn
     - webapps
 
-- include: tilltax.yml
-  become: yes
-  become_user: root
-  tags:
-    - tilltax
-    - webapps
-
-- include: tilltax-api.yml
-  become: yes
-  become_user: root
-  tags:
-    - tilltax
-    - tilltax-api
-    - webapps
-
 - include: tilltax-demo.yml
   become: yes
   become_user: root
@@ -92,42 +75,3 @@
     - tilltax
     - tilltax-demo
     - webapps
-
-- include: wastenot-api.yml
-  become: yes
-  become_user: root
-  tags:
-    - wastenot
-    - wastenot-api
-    - webapps
-
-- include: wastenot-web.yml
-  become: yes
-  become_user: root
-  tags:
-    - wastenot
-    - wastenot-web
-    - webapps
-
-- include: sonic-fusion.yml
-  become: yes
-  become_user: root
-  tags:
-    - sonicfusion
-    - wordpress
-    - webapps
-
-- include: biscuitpress.yml
-  become: yes
-  become_user: root
-  tags:
-    - biscuitpress
-    - wordpress
-    - webapps
-
-#- include: cooperage.yml
-  #become: yes
-  #become_user: root
-  #tags:
-    #- cooperage
-    #- webapps
