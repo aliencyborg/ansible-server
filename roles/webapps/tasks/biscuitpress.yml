@@ -1,7 +1,7 @@
 ---
 - name: biscuitpress backups container
   docker_container:
-    image: mariadb:10.1
+    image: mariadb:10.2
     name: biscuitpress-db-backups
     state: present
     volumes:
@@ -9,14 +9,15 @@
 
 - name: biscuitpress content container
   docker_container:
+    image: wordpress:4.8
     name: biscuitpress-content
-    image: aliencyborg/biscuitpress-content
-    pull: yes
     state: present
+    volumes:
+      - /var/www/html
 
 - name: biscuitpress data container
   docker_container:
-    image: mariadb:10.1
+    image: mariadb:10.2
     name: biscuitpress-db-data
     state: present
     volumes:
@@ -25,7 +26,7 @@
 - name: biscuitpress db
   docker_container:
     env_file: biscuitpress.env
-    image: mariadb:10.1
+    image: mariadb:10.2
     name: biscuitpress-db
     state: started
     volumes_from:
@@ -35,8 +36,10 @@
 - name: biscuitpress web
   docker_container:
     env_file: biscuitpress.env
-    expose: 80
-    image: wordpress:4.7
+    exposed:
+      - 80
+      - 443
+    image: wordpress:4.8
     name: biscuitpress-wp
     restart: yes
     state: started
@@ -51,7 +54,7 @@
 
 - name: biscuitpress ftp
   docker_container:
-    command: foo:pass:::upload
+    command: biscuitman:$1$WwiP1eLk$cxIQPpxR4UzFIJ0hbaynC.:e:33:33
     image: atmoz/sftp:latest
     name: biscuitpress-ftp
     state: started
