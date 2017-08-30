@@ -29,9 +29,9 @@
     image: mariadb:10.2
     name: biscuitpress-db
     state: started
-    volumes_from:
-      - biscuitpress-db-backups
-      - biscuitpress-db-data
+    volumes:
+      - biscuitpress-db-backups:/backups
+      - biscuitpress-db-data:/var/lib/mysql
 
 - name: biscuitpress web
   docker_container:
@@ -49,8 +49,8 @@
       LETSENCRYPT_EMAIL: "thealiencyborg@gmail.com"
     links:
       - "biscuitpress-db:mysql"
-    volumes_from:
-      - biscuitpress-content
+    volumes:
+      - biscuitpress-content:/var/www/html
 
 - name: biscuitpress ftp
   docker_container:
@@ -60,5 +60,5 @@
     state: started
     ports:
       - "49222:22"
-    volumes_from:
-      - biscuitpress-content
+    volumes:
+      - biscuitpress-content:/home/biscuitman/upload
