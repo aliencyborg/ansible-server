@@ -1,0 +1,75 @@
+---
+- name: cogo postgres data container
+  docker_container:
+    image: postgres:9.6
+    name: cogo-db-data
+    state: present
+
+- name: cogo postgres
+  docker_container:
+    image: postgres:9.6
+    name: cogo-db
+    state: started
+    exposed:
+      - 5432
+    volumes_from:
+      - cogo-db-data
+
+- name: cogo redis data container
+  docker_container:
+    image: redis:3.2
+    name: cogo-redis-data
+    state: present
+
+- name: cogo redis
+  docker_container:
+    command: redis-server --requirepass yourpassword
+    image: redis:2.3
+    name: cogo-redis
+    state: started
+    exposed:
+      - 6379
+    volumes_from:
+      - cogo-redis-data
+
+- name: cogo rails
+  docker_container:
+    env_file: cogo.env
+    image: aliencyborg/cogo-rails
+    name: cogo-rails
+    pull: true
+    restart: yes
+    state: started
+    env:
+      VIRTUAL_HOST: "cogomn.org,cogomn.com"
+      LETSENCRYPT_HOST: "cogomn.org,cogomn.com"
+      LETSENCRYPT_EMAIL: "thealiencyborg@gmail.com"
+    exposed:
+      - 3000
+    links:
+      - "cogo-db:postgres"
+      - "cogo-redis:redis"
+
+- name: cogo sidekiq
+  docker_container:
+    command: sidekiq -C config/sidekiq.yml.erb
+    env_file: cogo.env
+    image: aliencyborg/cogo-rails
+    links:
+      - "cogo-db:postgres"
+      - "cogo-redis:redis"
+    volumes_from:
+      - cogo-rails
+
+- name: cogo action cable
+  docker_container:
+    command: puma -p 28080 cable/config.ru
+    env_file: cogo.env
+    image: aliencyborg/cogo-rails
+    exposed:
+      - 28080
+    links:
+      - "cogo-redis:redis"
+    volumes_from:
+      - cogo-rails
+

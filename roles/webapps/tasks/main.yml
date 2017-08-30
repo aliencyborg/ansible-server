@@ -35,6 +35,13 @@
     - bombaybreakdown
     - webapps
 
+- include: cogo.yml
+  become: yes
+  become_user: root
+  tags:
+    - cogo
+    - webapps
+
 - include: mwmoving.yml
   become: yes
   become_user: root
