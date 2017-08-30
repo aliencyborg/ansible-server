@@ -24,7 +24,7 @@
 - name: cogo redis
   docker_container:
     command: redis-server --requirepass yourpassword
-    image: redis:2.3
+    image: redis:3.2
     name: cogo-redis
     state: started
     exposed:
@@ -42,6 +42,7 @@
     state: started
     env:
       VIRTUAL_HOST: "cogomn.org,cogomn.com"
+      VIRTUAL_PORT: 3000
       LETSENCRYPT_HOST: "cogomn.org,cogomn.com"
       LETSENCRYPT_EMAIL: "thealiencyborg@gmail.com"
     exposed:
@@ -55,6 +56,8 @@
     command: sidekiq -C config/sidekiq.yml.erb
     env_file: cogo.env
     image: aliencyborg/cogo-rails
+    name: cogo-sidekiq
+    state: started
     links:
       - "cogo-db:postgres"
       - "cogo-redis:redis"
@@ -66,6 +69,8 @@
     command: puma -p 28080 cable/config.ru
     env_file: cogo.env
     image: aliencyborg/cogo-rails
+    name: cogo-cable
+    state: started
     exposed:
       - 28080
     links:
