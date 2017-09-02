@@ -5,6 +5,14 @@
     name: cogo-db-data
     state: present
 
+- name: cogo postgres backups container
+  docker_container:
+    image: postgres:9.6
+    name: cogo-db-backups
+    state: present
+    volumes:
+      - /backups
+
 - name: cogo postgres
   docker_container:
     image: postgres:9.6
@@ -16,6 +24,7 @@
     exposed:
       - 5432
     volumes_from:
+      - cogo-db-backups
       - cogo-db-data
 
 - name: cogo redis data container
