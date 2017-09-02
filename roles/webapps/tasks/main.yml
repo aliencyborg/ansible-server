@@ -42,6 +42,12 @@
     - cogo
     - webapps
 
+- include: cogo-stage.yml
+  become: yes
+  become_user: root
+  tags:
+    - cogo-stage
+
 - include: mwmoving.yml
   become: yes
   become_user: root
