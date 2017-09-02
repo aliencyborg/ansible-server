@@ -10,7 +10,7 @@
     image: postgres:9.6
     name: cogo-db
     state: started
-    environment:
+    env:
       POSTGRES_USER: 'cogo'
       POSTGRES_PASSWORD: 'yourpassword'
     exposed:
