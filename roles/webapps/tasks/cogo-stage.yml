@@ -38,15 +38,15 @@
 - name: cogo rails
   docker_container:
     env_file: cogo.env
-    image: aliencyborg/cogo-rails
+    image: aliencyborg/cogo-rails-stage
     name: cogo-rails-stage
     pull: true
     restart: yes
     state: started
     env:
-      VIRTUAL_HOST: "cogomn.aliencyb.org,cogomn.aliencyb.com"
+      VIRTUAL_HOST: "cogomn.aliencyb.org"
       VIRTUAL_PORT: 3000
-      LETSENCRYPT_HOST: "cogomn.aliencyb.org,cogomn.aliencyb.com"
+      LETSENCRYPT_HOST: "cogomn.aliencyb.org"
       LETSENCRYPT_EMAIL: "thealiencyborg@gmail.com"
     exposed:
       - 3000
@@ -58,20 +58,20 @@
   docker_container:
     command: sidekiq -C config/sidekiq.yml.erb
     env_file: cogo.env
-    image: aliencyborg/cogo-rails
+    image: aliencyborg/cogo-rails-stage
     name: cogo-sidekiq-stage
     state: started
     links:
       - "cogo-db:postgres"
       - "cogo-redis:redis"
     volumes_from:
-      - cogo-rails
+      - cogo-rails-stage
 
 - name: cogo action cable
   docker_container:
     command: puma -p 28080 cable/config.ru
     env_file: cogo.env
-    image: aliencyborg/cogo-rails
+    image: aliencyborg/cogo-rails-stage
     name: cogo-cable-stage
     state: started
     exposed:
@@ -79,5 +79,5 @@
     links:
       - "cogo-redis:redis"
     volumes_from:
-      - cogo-rails
+      - cogo-rails-stage
 
