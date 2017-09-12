@@ -1,9 +1,7 @@
 ---
-- name: cogo postgres data container
-  docker_container:
-    image: postgres:9.6
-    name: cogo-db-data
-    state: present
+- name: cogo docker network
+  docker_network:
+    name: cogo
 
 - name: cogo postgres backups container
   docker_container:
@@ -13,19 +11,11 @@
     volumes:
       - /backups
 
-- name: cogo postgres
+- name: cogo postgres data container
   docker_container:
     image: postgres:9.6
-    name: cogo-db
-    state: started
-    env:
-      POSTGRES_USER: 'cogo'
-      POSTGRES_PASSWORD: 'yourpassword'
-    exposed:
-      - 5432
-    volumes_from:
-      - cogo-db-backups
-      - cogo-db-data
+    name: cogo-db-data
+    state: present
 
 - name: cogo redis data container
   docker_container:
@@ -33,14 +23,32 @@
     name: cogo-redis-data
     state: present
 
+- name: cogo postgres
+  docker_container:
+    image: postgres:9.6
+    name: cogo-db
+    state: started
+    env:
+      POSTGRES_USER: 'cogo'
+      POSTGRES_PASSWORD: "{{ COGO.POSTGRES_PASSWORD }}"
+    exposed:
+      - 5432
+    networks:
+      - name: cogo
+    volumes_from:
+      - cogo-db-backups
+      - cogo-db-data
+
 - name: cogo redis
   docker_container:
-    command: redis-server --requirepass yourpassword
+    command: redis-server --requirepass "{{ COGO.REDIS_PASSWORD }}"
     image: redis:3.2
     name: cogo-redis
     state: started
     exposed:
       - 6379
+    networks:
+      - name: cogo
     volumes_from:
       - cogo-redis-data
 
@@ -59,9 +67,11 @@
       LETSENCRYPT_EMAIL: "thealiencyborg@gmail.com"
     exposed:
       - 3000
-    links:
-      - "cogo-db:postgres"
-      - "cogo-redis:redis"
+    networks:
+      - name: cogo
+        links:
+          - "cogo-db:postgres"
+          - "cogo-redis:redis"
 
 - name: cogo sidekiq
   docker_container:
@@ -70,9 +80,11 @@
     image: aliencyborg/cogo-rails
     name: cogo-sidekiq
     state: started
-    links:
-      - "cogo-db:postgres"
-      - "cogo-redis:redis"
+    networks:
+      - name: cogo
+        links:
+          - "cogo-db:postgres"
+          - "cogo-redis:redis"
     volumes_from:
       - cogo-rails
 
@@ -85,8 +97,10 @@
     state: started
     exposed:
       - 28080
-    links:
-      - "cogo-redis:redis"
+    networks:
+      - name: cogo
+        links:
+          - "cogo-redis:redis"
     volumes_from:
       - cogo-rails
 

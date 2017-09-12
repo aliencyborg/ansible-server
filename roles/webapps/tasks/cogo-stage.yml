@@ -1,11 +1,29 @@
 ---
-- name: cogo postgres data container
+- name: cogo-stage docker network
+  docker_network:
+    name: cogo-stage
+
+- name: cogo-stage postgres backups container
+  docker_container:
+    image: postgres:9.6
+    name: cogo-db-backups-stage
+    state: present
+    volumes:
+      - /backups
+
+- name: cogo-stage postgres data container
   docker_container:
     image: postgres:9.6
     name: cogo-db-data-stage
     state: present
 
-- name: cogo postgres
+- name: cogo-stage redis data container
+  docker_container:
+    image: redis:3.2
+    name: cogo-redis-data-stage
+    state: present
+
+- name: cogo-stage postgres
   docker_container:
     image: postgres:9.6
     name: cogo-db-stage
@@ -15,16 +33,13 @@
       POSTGRES_PASSWORD: "{{ COGO_STAGE.POSTGRES_PASSWORD }}"
     exposed:
       - 5432
+    networks:
+      - name: cogo-stage
     volumes_from:
+      - cogo-db-backups-stage
       - cogo-db-data-stage
 
-- name: cogo redis data container
-  docker_container:
-    image: redis:3.2
-    name: cogo-redis-data-stage
-    state: present
-
-- name: cogo redis
+- name: cogo-stage redis
   docker_container:
     command: redis-server --requirepass "{{ COGO_STAGE.REDIS_PASSWORD }}"
     image: redis:3.2
@@ -32,10 +47,12 @@
     state: started
     exposed:
       - 6379
+    networks:
+      - name: cogo-stage
     volumes_from:
       - cogo-redis-data-stage
 
-- name: cogo rails
+- name: cogo-stage rails
   docker_container:
     env_file: cogo-stage.env
     image: aliencyborg/cogo-rails-stage
@@ -50,24 +67,28 @@
       LETSENCRYPT_EMAIL: "thealiencyborg@gmail.com"
     exposed:
       - 3000
-    links:
-      - "cogo-db-stage:postgres"
-      - "cogo-redis-stage:redis"
+    networks:
+      - name: cogo-stage
+        links:
+          - "cogo-db-stage:postgres"
+          - "cogo-redis-stage:redis"
 
-- name: cogo sidekiq
+- name: cogo-stage sidekiq
   docker_container:
     command: sidekiq -C config/sidekiq.yml.erb
     env_file: cogo-stage.env
     image: aliencyborg/cogo-rails-stage
     name: cogo-sidekiq-stage
     state: started
-    links:
-      - "cogo-db-stage:postgres"
-      - "cogo-redis-stage:redis"
+    networks:
+      - name: cogo-stage
+        links:
+          - "cogo-db-stage:postgres"
+          - "cogo-redis-stage:redis"
     volumes_from:
       - cogo-rails-stage
 
-- name: cogo action cable
+- name: cogo-stage action cable
   docker_container:
     command: puma -p 28080 cable/config.ru
     env_file: cogo-stage.env
@@ -76,8 +97,10 @@
     state: started
     exposed:
       - 28080
-    links:
-      - "cogo-redis-stage:redis"
+    networks:
+      - name: cogo-stage
+        links:
+          - "cogo-redis-stage:redis"
     volumes_from:
       - cogo-rails-stage
 
