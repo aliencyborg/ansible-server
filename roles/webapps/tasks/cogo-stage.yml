@@ -9,7 +9,7 @@
     name: cogo-db-backups-stage
     state: present
     volumes:
-      - /backups
+      - /backup
 
 - name: cogo-stage postgres data container
   docker_container:
@@ -38,11 +38,19 @@
     image: jmcarbo/docker-postgres-backup
     name: cogo-db-backer-upper-stage
     env:
+      INIT_BACKUP: true
+      INIT_RESTORE_LATEST: true
+      POSTGRES_DB: 'cogo_staging'
       POSTGRES_HOST: 'pg'
+      POSTGRES_PASSWORD: "{{ COGO_STAGE.POSTGRES_PASSWORD }}"
+      POSTGRES_PORT: '5432'
+      POSTGRES_USER: 'cogo'
     networks:
       - name: cogo-stage
         links:
           - "cogo-db-stage:pg"
+    volumes_from:
+      - cogo-db-backups-stage
 
 - name: cogo-stage redis data container
   docker_container:
