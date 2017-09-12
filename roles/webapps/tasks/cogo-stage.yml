@@ -17,12 +17,6 @@
     name: cogo-db-data-stage
     state: present
 
-- name: cogo-stage redis data container
-  docker_container:
-    image: redis:3.2
-    name: cogo-redis-data-stage
-    state: present
-
 - name: cogo-stage postgres
   docker_container:
     image: postgres:9.6
@@ -38,6 +32,21 @@
     volumes_from:
       - cogo-db-backups-stage
       - cogo-db-data-stage
+
+- name: cogo-stage backer-upper
+  docker_container:
+    image: jmcarbo/docker-postgres-backup
+    name: cogo-db-backer-upper-stage
+    networks:
+      - name: cogo-stage
+        links:
+          - "cogo-db-stage:pg"
+
+- name: cogo-stage redis data container
+  docker_container:
+    image: redis:3.2
+    name: cogo-redis-data-stage
+    state: present
 
 - name: cogo-stage redis
   docker_container:

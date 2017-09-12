@@ -17,12 +17,6 @@
     name: cogo-db-data
     state: present
 
-- name: cogo redis data container
-  docker_container:
-    image: redis:3.2
-    name: cogo-redis-data
-    state: present
-
 - name: cogo postgres
   docker_container:
     image: postgres:9.6
@@ -38,6 +32,12 @@
     volumes_from:
       - cogo-db-backups
       - cogo-db-data
+
+- name: cogo redis data container
+  docker_container:
+    image: redis:3.2
+    name: cogo-redis-data
+    state: present
 
 - name: cogo redis
   docker_container:
