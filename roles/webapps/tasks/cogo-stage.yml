@@ -37,6 +37,8 @@
   docker_container:
     image: jmcarbo/docker-postgres-backup
     name: cogo-db-backer-upper-stage
+    env:
+      POSTGRES_HOST: 'pg'
     networks:
       - name: cogo-stage
         links:
