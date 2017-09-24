@@ -55,6 +55,14 @@
     - mwmoving
     - webapps
 
+- include: pretty-good.yml
+  become: yes
+  become_user: root
+  tags:
+    - pretty-good
+    - ghost
+    - webapps
+
 - include: sudo-science.yml
   become: yes
   become_user: root
