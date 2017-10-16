@@ -94,10 +94,11 @@
 
 - name: cogo-stage sidekiq
   docker_container:
-    command: sidekiq -C config/sidekiq.yml.erb
+    command: bundle exec sidekiq -C config/sidekiq.yml.erb
     env_file: cogo-stage.env
     image: aliencyborg/cogo-rails-stage
     name: cogo-sidekiq-stage
+    restart: yes
     state: started
     networks:
       - name: cogo-stage
@@ -109,7 +110,7 @@
 
 - name: cogo-stage action cable
   docker_container:
-    command: puma -p 28080 cable/config.ru
+    command: bundle exec puma -p 28080 cable/config.ru
     env_file: cogo-stage.env
     image: aliencyborg/cogo-rails-stage
     name: cogo-cable-stage

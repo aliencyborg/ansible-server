@@ -94,7 +94,7 @@
 
 - name: cogo sidekiq
   docker_container:
-    command: sidekiq -C config/sidekiq.yml.erb
+    command: bundle exec sidekiq -C config/sidekiq.yml.erb
     env_file: cogo.env
     image: aliencyborg/cogo-rails
     name: cogo-sidekiq
@@ -110,7 +110,7 @@
 
 - name: cogo action cable
   docker_container:
-    command: puma -p 28080 cable/config.ru
+    command: bundle exec puma -p 28080 cable/config.ru
     env_file: cogo.env
     image: aliencyborg/cogo-rails
     name: cogo-cable
