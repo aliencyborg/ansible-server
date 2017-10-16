@@ -98,6 +98,7 @@
     env_file: cogo.env
     image: aliencyborg/cogo-rails
     name: cogo-sidekiq
+    restart: yes
     state: started
     networks:
       - name: cogo
