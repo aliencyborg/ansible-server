@@ -1,0 +1,12 @@
+---
+- name: pull and run rosas-pics
+  docker_container:
+    name: rosas-pics
+    image: ballpointpenguin/rosas-pics
+    pull: true
+    state: started
+    restart: yes
+    env:
+      LETSENCRYPT_EMAIL: 'thealiencyborg@gmail.com'
+      LETSENCRYPT_HOST: 'rosas.pics,www.rosas.pics'
+      VIRTUAL_HOST: 'rosas.pics,www.rosas.pics'
