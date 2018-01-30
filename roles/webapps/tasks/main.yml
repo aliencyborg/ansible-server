@@ -110,6 +110,13 @@
     - ormn
     - webapps
 
+- include: tilltax-api.yml
+  become: yes
+  become_user: root
+  tags:
+    - tilltax-api
+    - webapps
+
 - include: tilltax-demo.yml
   become: yes
   become_user: root
@@ -117,9 +124,9 @@
     - tilltax-demo
     - webapps
 
-- include: tilltax-preview.yml
+- include: tilltax-web.yml
   become: yes
   become_user: root
   tags:
-    - tilltax-preview
+    - tilltax-web
     - webapps
