@@ -1,12 +1,12 @@
 ---
-- name: pull and run aliencyborg
+- name: pull and run vanadium
   docker_container:
-    name: aliencyborg
+    name: vanadium
     image: aliencyborg/aliencyborg-demo
     pull: true
     state: started
     restart: yes
     env:
       LETSENCRYPT_EMAIL: 'ben@aliencyb.org'
-      LETSENCRYPT_HOST: 'aliencyb.org,www.aliencyb.org'
-      VIRTUAL_HOST: 'aliencyb.org,www.aliencyb.org'
+      LETSENCRYPT_HOST: 'vanadium.tech,www.vanadium.tech'
+      VIRTUAL_HOST: 'vanadium.tech,www.vanadium.tech'

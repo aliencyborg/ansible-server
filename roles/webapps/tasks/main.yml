@@ -13,13 +13,6 @@
     - afsheenfatemi
     - ghost
 
-- include: biscuitman.yml
-  become: yes
-  become_user: root
-  tags:
-    - biscuitman
-    - webapps
-
 - include: biscuitpress.yml
   become: yes
   become_user: root
@@ -62,6 +55,14 @@
     - mwmoving
     - webapps
 
+- include: otcpress.yml
+  become: yes
+  become_user: root
+  tags:
+    - otcpress
+    - wordpress
+    - webpress
+
 - include: pics-api.yml
   become: yes
   become_user: root
@@ -90,6 +91,14 @@
   tags:
     - sudoscience
     - ghost
+    - webapps
+
+- include: rainy-river.yml
+  become: yes
+  become_user: root
+  tags:
+    - rainy-river
+    - wordpress
     - webapps
 
 - include: teeming-api.yml
@@ -130,3 +139,11 @@
   tags:
     - tilltax-web
     - webapps
+
+- include: vanadium.yml
+  become: yes
+  become_user: root
+  tags:
+    - vanadium
+    - webapps
+

@@ -44,9 +44,9 @@
     restart: yes
     state: started
     env:
-      VIRTUAL_HOST: "bmpress.aliencyb.org"
-      LETSENCRYPT_HOST: "bmpress.aliencyb.org"
-      LETSENCRYPT_EMAIL: "thealiencyborg@gmail.com"
+      LETSENCRYPT_EMAIL: 'ben@aliencyb.org'
+      LETSENCRYPT_HOST: 'biscuitmanchicago.com,www.biscuitmanchicago.com'
+      VIRTUAL_HOST: 'biscuitmanchicago.com,www.biscuitmanchicago.com'
     links:
       - "biscuitpress-db:mysql"
     volumes:
