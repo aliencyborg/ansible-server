@@ -9,4 +9,3 @@
   vars_files:
     - cogo-vars.yml
     - cogo-stage-vars.yml
-    - pics-api-vars.yml

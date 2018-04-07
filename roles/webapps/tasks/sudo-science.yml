@@ -36,14 +36,14 @@
   docker_container:
     env_file: sudo-science.env
     expose: 2368
-    image: ghost:0.11.4
+    image: ghost:1.21
     name: sudo-science-web
     restart: yes
     state: started
     env:
       VIRTUAL_HOST: "sudo-science.com,www.sudo-science.com"
       LETSENCRYPT_HOST: "sudo-science.com,www.sudo-science.com"
-      LETSENCRYPT_EMAIL: "thealiencyborg@gmail.com"
+      LETSENCRYPT_EMAIL: "ben@aliencyb.org"
     links:
       - "sudo-science-db:mysql"
     volumes_from:
