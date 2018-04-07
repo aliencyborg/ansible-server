@@ -58,7 +58,7 @@
     image: atmoz/sftp:latest
     name: biscuitpress-ftp
     state: started
-    ports:
+    published_ports:
       - "49222:22"
     volumes:
       - biscuitpress-content:/home/biscuitman/upload

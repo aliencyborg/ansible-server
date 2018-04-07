@@ -28,9 +28,21 @@
     image: mariadb:10.1
     name: sudo-science-db
     state: started
+    published_ports:
+      - "43306:3306"
     volumes_from:
       - sudo-science-db-backups
       - sudo-science-db-data
+
+- name: sudo-science adminer
+  docker_container:
+    image: adminer:latest
+    name: sudo-science-adminer
+    state: started
+    links:
+      - "sudo-science-db:db"
+    published_ports:
+      - "43308:8080"
 
 - name: sudo-science web
   docker_container:
