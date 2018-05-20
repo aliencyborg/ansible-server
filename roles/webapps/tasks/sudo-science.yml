@@ -1,7 +1,7 @@
 ---
 - name: sudo-science backups container
   docker_container:
-    image: mariadb:10.1
+    image: mariadb:10.3
     name: sudo-science-db-backups
     state: present
     volumes:
@@ -10,13 +10,13 @@
 - name: sudo-science content container
   docker_container:
     name: sudo-science-content
-    image: aliencyborg/sudo-science-content
+    image: aliencyborg/sudo-science-content:latest
     pull: yes
     state: present
 
 - name: sudo-science data container
   docker_container:
-    image: mariadb:10.1
+    image: mariadb:10.3
     name: sudo-science-db-data
     state: present
     volumes:
@@ -25,7 +25,7 @@
 - name: sudo-science db
   docker_container:
     env_file: sudo-science.env
-    image: mariadb:10.1
+    image: mariadb:10.3
     name: sudo-science-db
     state: started
     published_ports:
@@ -48,7 +48,7 @@
   docker_container:
     env_file: sudo-science.env
     expose: 2368
-    image: ghost:1.21
+    image: ghost:1.22
     name: sudo-science-web
     restart: yes
     state: started
