@@ -1,20 +1,4 @@
 ---
-- include: alhazen-api.yml
-  become: yes
-  become_user: root
-  tags:
-    - alhazen
-    - alhazen-api
-    - webapps
-
-- include: alhazen-web.yml
-  become: yes
-  become_user: root
-  tags:
-    - alhazen
-    - alhazen-web
-    - webapps
-
 - include: aliencyborg.yml
   become: yes
   become_user: root
@@ -85,6 +69,22 @@
   tags:
     - pretty-good
     - ghost
+    - webapps
+
+- include: rosas-pics-api.yml
+  become: yes
+  become_user: root
+  tags:
+    - rosas-pics
+    - rosas-pics-api
+    - webapps
+
+- include: rosas-pics-web.yml
+  become: yes
+  become_user: root
+  tags:
+    - rosas-pics
+    - rosas-pics-web
     - webapps
 
 - include: sudo-science.yml
