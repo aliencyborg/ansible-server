@@ -55,6 +55,13 @@
     - mwmoving
     - webapps
 
+- include: ohwowscore.yml
+  become: yes
+  become_user: root
+  tags:
+    - ohwowscore
+    - webapps
+
 - include: otcpress.yml
   become: yes
   become_user: root
