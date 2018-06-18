@@ -156,3 +156,10 @@
     - vanadium
     - webapps
 
+- include: vanadium-test.yml
+  become: yes
+  become_user: root
+  tags:
+    - vanadium-test
+    - webapps
+
