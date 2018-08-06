@@ -6,12 +6,13 @@
     - aliencyborg
     - webapps
 
-- include: afsheen-fatemi.yml
-  become: yes
-  become_user: root
-  tags:
-    - afsheenfatemi
-    - ghost
+#- include: afsheen-fatemi.yml
+  #become: yes
+  #become_user: root
+  #tags:
+    #- afsheenfatemi
+    #- ghost
+    #- webapps
 
 - include: biscuitpress.yml
   become: yes
@@ -35,25 +36,25 @@
     - chucklove
     - webapps
 
-- include: cogo.yml
-  become: yes
-  become_user: root
-  tags:
-    - cogo
-    - webapps
+#- include: cogo.yml
+  #become: yes
+  #become_user: root
+  #tags:
+    #- cogo
+    #- webapps
 
-- include: cogo-stage.yml
-  become: yes
-  become_user: root
-  tags:
-    - cogo-stage
+#- include: cogo-stage.yml
+  #become: yes
+  #become_user: root
+  #tags:
+    #- cogo-stage
 
-- include: mwmoving.yml
-  become: yes
-  become_user: root
-  tags:
-    - mwmoving
-    - webapps
+#- include: mwmoving.yml
+  #become: yes
+  #become_user: root
+  #tags:
+    #- mwmoving
+    #- webapps
 
 - include: ohwowscore.yml
   become: yes
@@ -70,29 +71,21 @@
     - wordpress
     - webpress
 
-- include: pretty-good.yml
-  become: yes
-  become_user: root
-  tags:
-    - pretty-good
-    - ghost
-    - webapps
+#- include: rosas-pics-api.yml
+  #become: yes
+  #become_user: root
+  #tags:
+    #- rosas-pics
+    #- rosas-pics-api
+    #- webapps
 
-- include: rosas-pics-api.yml
-  become: yes
-  become_user: root
-  tags:
-    - rosas-pics
-    - rosas-pics-api
-    - webapps
-
-- include: rosas-pics-web.yml
-  become: yes
-  become_user: root
-  tags:
-    - rosas-pics
-    - rosas-pics-web
-    - webapps
+#- include: rosas-pics-web.yml
+  #become: yes
+  #become_user: root
+  #tags:
+    #- rosas-pics
+    #- rosas-pics-web
+    #- webapps
 
 - include: sudo-science.yml
   become: yes
@@ -108,24 +101,6 @@
   tags:
     - rainy-river
     - wordpress
-    - webapps
-
-- include: teeming-api.yml
-  become: yes
-  become_user: root
-  tags:
-    - teeming
-    - teeming-api
-    - ormn
-    - webapps
-
-- include: teeming-web.yml
-  become: yes
-  become_user: root
-  tags:
-    - teeming
-    - teeming-web
-    - ormn
     - webapps
 
 - include: tilltax-api.yml
