@@ -6,6 +6,14 @@
     - aliencyborg
     - webapps
 
+- include: already-pres.yml
+  become: yes
+  become_user: root
+  tags:
+    - already-pres
+    - wordpress
+    - webapps
+
 #- include: afsheen-fatemi.yml
   #become: yes
   #become_user: root
