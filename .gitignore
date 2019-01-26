@@ -1,3 +1,5 @@
 *.env
 *.retry
 *-vars.yml
+
+host_vars/localhost.yml

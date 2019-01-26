@@ -1,0 +1,18 @@
+---
+- name: Run nginx-proxy letsencrypt companion
+  hosts: localhost
+  become: True
+  tasks:
+    - docker_container:
+        name: nginx-letsencrypt
+        image: jrcs/letsencrypt-nginx-proxy-companion
+        pull: true
+        state: started
+        restart: true
+        env:
+          NGINX_DOCKER_GEN_CONTAINER: docker-gen
+        volumes:
+          - /usr/local/etc/nginx/certs:/etc/nginx/certs:rw
+          - /var/run/docker.sock:/var/run/docker.sock:ro
+        volumes_from:
+          - nginx-public

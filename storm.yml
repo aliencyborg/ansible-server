@@ -1,7 +1,0 @@
----
-- hosts: storm
-  remote_user: root
-  roles:
-    - common-suse
-    - development-suse
-#    - laptop-suse

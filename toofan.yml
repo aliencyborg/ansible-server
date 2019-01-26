@@ -1,0 +1,14 @@
+---
+- name: Run the server setup playbooks
+  hosts: localhost
+
+- import_playbook: arch/packages.yml
+
+- import_playbook: arch/host.yml
+- import_playbook: arch/user.yml
+  
+- import_playbook: arch/docker.yml
+- import_playbook: arch/nginx-public.yml
+- import_playbook: arch/remove-docker-gen.yml
+- import_playbook: arch/docker-gen.yml
+- import_playbook: arch/nginx-letsencrypt.yml

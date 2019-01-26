@@ -1,0 +1,35 @@
+---
+- name: Install common packages
+  hosts: localhost
+  become: True
+  tasks:
+    - name: install packages
+      pacman:
+        name: "{{ packages }}"
+        state: present
+        update_cache: yes
+      vars:
+        packages:
+          - ack
+          - bison
+          - bzip2
+          - ctags
+          - curl
+          - emacs
+          - git
+          - htop
+          - jnettop
+          - make
+          - openssh
+          - patch
+          - reflector
+          - rxvt-unicode
+          - sudo
+          - svn
+          - tmux
+          - tree
+          - unzip
+          - vim
+          - wget
+          - xclip
+

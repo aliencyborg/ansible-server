@@ -1,0 +1,17 @@
+---
+- name: Run docker-gen container
+  hosts: localhost
+  become: True
+  tasks:
+    - docker_container:
+        name: docker-gen
+        image: jwilder/docker-gen
+        pull: true
+        state: started
+        restart: true
+        volumes:
+          - /usr/local/etc/nginx/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro
+          - /var/run/docker.sock:/tmp/docker.sock:ro
+        volumes_from:
+          - nginx-public
+        entrypoint: "/usr/local/bin/docker-gen -notify-sighup nginx-public -watch -only-exposed -wait 5s:30s /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf"
