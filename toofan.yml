@@ -2,13 +2,19 @@
 - name: Run the server setup playbooks
   hosts: localhost
 
+  # Base Packages
+- import_playbook: arch/upgrade.yml
 - import_playbook: arch/packages.yml
 
-- import_playbook: arch/host.yml
-- import_playbook: arch/user.yml
+  # User & Host
+- import_playbook: metal/host.yml
+- import_playbook: metal/user.yml
   
-- import_playbook: arch/docker.yml
-- import_playbook: arch/nginx-public.yml
-- import_playbook: arch/remove-docker-gen.yml
-- import_playbook: arch/docker-gen.yml
-- import_playbook: arch/nginx-letsencrypt.yml
+  # Web Server
+- import_playbook: server/docker.yml
+- import_playbook: server/nginx-public.yml
+- import_playbook: server/docker-gen.yml
+- import_playbook: server/nginx-letsencrypt.yml
+
+  # Web Applications
+- import_playbook: webapps/bombaybreakdown.yml

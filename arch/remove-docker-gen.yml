@@ -1,8 +1,0 @@
----
-- name: Remove docker-gen container
-  hosts: localhost
-  become: True
-  tasks:
-    - docker_container:
-        name: docker-gen
-        state: absent
