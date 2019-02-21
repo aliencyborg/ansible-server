@@ -6,7 +6,7 @@
     - name: tilltax2 web demo
       docker_container:
         name: tilltax-test
-        image: aliencyborg/tilltax-test
+        image: aliencyborg/tilltax-test:latest
         pull: true
         state: started
         restart: yes
