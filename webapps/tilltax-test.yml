@@ -1,0 +1,17 @@
+---
+- name: TillTaxTest
+  hosts: localhost
+  become: True
+  tasks:
+    - name: tilltax2 web demo
+      docker_container:
+        name: tilltax-test
+        image: aliencyborg/tilltax-test
+        pull: true
+        state: started
+        restart: yes
+        env:
+          LETSENCRYPT_EMAIL: 'ben@aliencyb.org'
+          LETSENCRYPT_HOST: 'tilltaxtest.aliencyb.org'
+          VIRTUAL_HOST: 'tilltaxtest.aliencyb.org'
+

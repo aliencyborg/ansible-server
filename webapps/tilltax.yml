@@ -1,0 +1,47 @@
+---
+- name: TillTax
+  hosts: localhost
+  become: True
+  tasks:
+    - name: tilltax postgres data container
+      docker_container:
+        name: tilltax-db-data
+        image: postgres:9.6
+        state: started
+
+    - name: tilltax postgres
+      docker_container:
+        env_file: /home/{{ username }}/ansible/tilltax.env
+        image: postgres:9.6
+        name: tilltax-db
+        state: started
+        volumes_from:
+          - tilltax-db-data
+
+    - name: tilltax api
+      docker_container:
+        env_file: /home/{{ username }}/ansible/tilltax.env
+        image: aliencyborg/tilltax-api
+        name: tilltax-api
+        pull: true
+        restart: yes
+        state: started
+        links:
+          - "tilltax-db:db"
+        env:
+          VIRTUAL_HOST: "api.tilltax.com"
+          LETSENCRYPT_HOST: "api.tilltax.com"
+          LETSENCRYPT_EMAIL: "thealiencyborg@gmail.com"
+
+    - name: tilltax web client
+      docker_container:
+        name: tilltax-web
+        image: aliencyborg/tilltax-web
+        pull: true
+        state: started
+        restart: yes
+        env:
+          LETSENCRYPT_EMAIL: 'ben@aliencyb.org'
+          LETSENCRYPT_HOST: 'tilltax.com,www.tilltax.com'
+          VIRTUAL_HOST: 'tilltax.com,www.tilltax.com'
+
