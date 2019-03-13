@@ -1,0 +1,15 @@
+---
+- name: AlienCyborg homepage
+  hosts: localhost
+  become: True
+  tasks:
+    - docker_container:
+        name: aliencyborg
+        image: aliencyborg/aliencyborg
+        pull: true
+        state: started
+        restart: yes
+        env:
+          LETSENCRYPT_EMAIL: 'ben@aliencyb.org'
+          LETSENCRYPT_HOST: 'aliencyb.org,www.aliencyb.org,aliencyborg.net,www.aliencyborg.net'
+          VIRTUAL_HOST: 'aliencyb.org,www.aliencyb.org,aliencyborg.net,www.aliencyborg.net'

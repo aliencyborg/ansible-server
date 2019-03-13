@@ -6,6 +6,3 @@
     - metal
     - webserver
     - webapps
-  vars_files:
-    - cogo-vars.yml
-    - cogo-stage-vars.yml

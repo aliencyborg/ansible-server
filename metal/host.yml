@@ -1,0 +1,23 @@
+---
+- name: Set up Host
+  hosts: localhost
+  become: True
+  tasks:
+    - name: set hostname
+      hostname:
+        name: "{{ hostname }}"
+
+    - name: ensure /etc/hosts exists
+      file: path=/etc/hosts state=touch
+
+    - name: add hostname to /etc/hosts
+      lineinfile:
+        path: /etc/hosts
+        regexp: '^127\.0\.0\.1'
+        line: '127.0.0.1 {{ hostname }}.localdomain localhost {{ hostname }}'
+
+    - name: add ipv6 localhost to /etc/hosts
+      lineinfile:
+        path: /etc/hosts
+        regexp: '^::1\s'
+        line: '::1 localhost'

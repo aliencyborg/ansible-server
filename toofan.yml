@@ -1,0 +1,24 @@
+---
+- name: Run the server setup playbooks
+  hosts: localhost
+
+  # Base Packages
+- import_playbook: arch/upgrade.yml
+- import_playbook: arch/packages.yml
+
+  # User & Host
+- import_playbook: metal/host.yml
+- import_playbook: metal/user.yml
+  
+  # Web Server
+- import_playbook: server/docker.yml
+- import_playbook: server/nginx-public.yml
+- import_playbook: server/docker-gen.yml
+- import_playbook: server/nginx-letsencrypt.yml
+
+  # Web Applications
+- import_playbook: webapps/aliencyborg.yml
+- import_playbook: webapps/biscuitman-down.yml
+- import_playbook: webapps/bombaybreakdown.yml
+- import_playbook: webapps/chucklove.yml
+- import_playbook: webapps/tilltax.yml

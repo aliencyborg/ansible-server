@@ -1,6 +1,0 @@
----
-- hosts: archangel
-  remote_user: vagrant
-  roles:
-    - common
-    - development

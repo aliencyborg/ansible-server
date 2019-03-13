@@ -1,0 +1,15 @@
+---
+- name: Biscuitman downpage
+  hosts: localhost
+  become: True
+  tasks:
+    - docker_container:
+        name: biscuitman-down
+        image: aliencyborg/biscuitman-down
+        pull: true
+        state: started
+        restart: yes
+        env:
+          LETSENCRYPT_EMAIL: 'ben@aliencyb.org'
+          LETSENCRYPT_HOST: 'biscuitmanchicago.com,www.biscuitmanchicago.com'
+          VIRTUAL_HOST: 'biscuitmanchicago.com,www.biscuitmanchicago.com'

@@ -1,20 +1,4 @@
 ---
-- include: alhazen-api.yml
-  become: yes
-  become_user: root
-  tags:
-    - alhazen
-    - alhazen-api
-    - webapps
-
-- include: alhazen-web.yml
-  become: yes
-  become_user: root
-  tags:
-    - alhazen
-    - alhazen-web
-    - webapps
-
 - include: aliencyborg.yml
   become: yes
   become_user: root
@@ -51,26 +35,6 @@
     - chucklove
     - webapps
 
-- include: cogo.yml
-  become: yes
-  become_user: root
-  tags:
-    - cogo
-    - webapps
-
-- include: cogo-stage.yml
-  become: yes
-  become_user: root
-  tags:
-    - cogo-stage
-
-- include: mwmoving.yml
-  become: yes
-  become_user: root
-  tags:
-    - mwmoving
-    - webapps
-
 - include: otcpress.yml
   become: yes
   become_user: root
@@ -78,14 +42,6 @@
     - otcpress
     - wordpress
     - webpress
-
-- include: pretty-good.yml
-  become: yes
-  become_user: root
-  tags:
-    - pretty-good
-    - ghost
-    - webapps
 
 - include: sudo-science.yml
   become: yes
@@ -101,24 +57,6 @@
   tags:
     - rainy-river
     - wordpress
-    - webapps
-
-- include: teeming-api.yml
-  become: yes
-  become_user: root
-  tags:
-    - teeming
-    - teeming-api
-    - ormn
-    - webapps
-
-- include: teeming-web.yml
-  become: yes
-  become_user: root
-  tags:
-    - teeming
-    - teeming-web
-    - ormn
     - webapps
 
 - include: tilltax-api.yml
@@ -141,11 +79,3 @@
   tags:
     - tilltax-web
     - webapps
-
-- include: vanadium.yml
-  become: yes
-  become_user: root
-  tags:
-    - vanadium
-    - webapps
-

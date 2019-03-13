@@ -1,0 +1,15 @@
+---
+- name: Bombay Breakdown
+  hosts: localhost
+  become: True
+  tasks:
+    - docker_container:
+        name: bombaybreakdown
+        image: aliencyborg/bombaybreakdown
+        pull: true
+        state: started
+        restart: yes
+        env:
+          LETSENCRYPT_EMAIL: 'ben@aliencyb.org'
+          LETSENCRYPT_HOST: 'bombaybreakdown.com,www.bombaybreakdown.com'
+          VIRTUAL_HOST: 'bombaybreakdown.com,www.bombaybreakdown.com'

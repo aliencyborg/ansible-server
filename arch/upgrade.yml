@@ -1,0 +1,8 @@
+---
+- name: Upgrade the System
+  hosts: localhost
+  become: True
+  tasks:
+    - pacman:
+        update_cache: yes
+        upgrade: yes
