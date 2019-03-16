@@ -6,12 +6,21 @@
     - aliencyborg
     - webapps
 
-- include: afsheen-fatemi.yml
+- include: already-pres.yml
   become: yes
   become_user: root
   tags:
-    - afsheenfatemi
-    - ghost
+    - already-pres
+    - wordpress
+    - webapps
+
+#- include: afsheen-fatemi.yml
+  #become: yes
+  #become_user: root
+  #tags:
+    #- afsheenfatemi
+    #- ghost
+    #- webapps
 
 - include: biscuitpress.yml
   become: yes
@@ -35,6 +44,33 @@
     - chucklove
     - webapps
 
+#- include: cogo.yml
+  #become: yes
+  #become_user: root
+  #tags:
+    #- cogo
+    #- webapps
+
+#- include: cogo-stage.yml
+  #become: yes
+  #become_user: root
+  #tags:
+    #- cogo-stage
+
+#- include: mwmoving.yml
+  #become: yes
+  #become_user: root
+  #tags:
+    #- mwmoving
+    #- webapps
+
+- include: ohwowscore.yml
+  become: yes
+  become_user: root
+  tags:
+    - ohwowscore
+    - webapps
+
 - include: otcpress.yml
   become: yes
   become_user: root
@@ -42,6 +78,22 @@
     - otcpress
     - wordpress
     - webpress
+
+#- include: rosas-pics-api.yml
+  #become: yes
+  #become_user: root
+  #tags:
+    #- rosas-pics
+    #- rosas-pics-api
+    #- webapps
+
+#- include: rosas-pics-web.yml
+  #become: yes
+  #become_user: root
+  #tags:
+    #- rosas-pics
+    #- rosas-pics-web
+    #- webapps
 
 - include: sudo-science.yml
   become: yes
@@ -79,3 +131,18 @@
   tags:
     - tilltax-web
     - webapps
+
+- include: vanadium.yml
+  become: yes
+  become_user: root
+  tags:
+    - vanadium
+    - webapps
+
+- include: vanadium-test.yml
+  become: yes
+  become_user: root
+  tags:
+    - vanadium-test
+    - webapps
+

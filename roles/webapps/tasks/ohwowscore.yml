@@ -1,0 +1,12 @@
+---
+- name: pull and run ohwowscore
+  docker_container:
+    name: ohwowscore
+    image: aliencyborg/ohwowscore
+    pull: true
+    state: started
+    restart: yes
+    env:
+      LETSENCRYPT_EMAIL: 'ben@aliencyb.org'
+      LETSENCRYPT_HOST: 'ohwowscore.com,www.ohwowscore.com'
+      VIRTUAL_HOST: 'ohwowscore.com,www.ohwowscore.com'
