@@ -1,0 +1,29 @@
+---
+- name: teeming rails postgres data container
+  docker_container:
+    image: postgres:9.6
+    name: teeming-rails-db-data
+    state: present
+
+- name: teeming rails postgres
+  docker_container:
+    image: postgres:9.6
+    name: teeming-rails-db
+    state: started
+    volumes_from:
+      - teeming-rails-db-data
+
+- name: teeming rails api
+  docker_container:
+    env_file: teeming-rails.env
+    image: aliencyborg/teeming-rails
+    name: teeming-rails
+    pull: true
+    restart: yes
+    state: started
+    env:
+      VIRTUAL_HOST: "members.ourrevolutionmn.com"
+      LETSENCRYPT_HOST: "members.ourrevolutionmn.com"
+      LETSENCRYPT_EMAIL: "thealiencyborg@gmail.com"
+    links:
+      - "teeming-rails-db:db"

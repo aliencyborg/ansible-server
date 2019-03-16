@@ -1,0 +1,10 @@
+---
+- name: pull and run mwmoving
+  docker_container:
+    name: mwmoving-web
+    image: aliencyborg/mwmoving-web
+    pull: true
+    state: started
+    restart: yes
+    env:
+      VIRTUAL_HOST: 'mwmoving.aliencyb.org'
