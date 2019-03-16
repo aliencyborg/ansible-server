@@ -1,12 +1,12 @@
 ---
-- name: pull and run rosas-pics
+- name: pull and run alhazen-web
   docker_container:
-    name: rosas-pics
-    image: ballpointpenguin/rosas-pics
+    name: alhazen-web
+    image: aliencyborg/alhazen-web
     pull: true
     state: started
     restart: yes
     env:
-      LETSENCRYPT_EMAIL: 'thealiencyborg@gmail.com'
+      LETSENCRYPT_EMAIL: 'ben@aliencyb.org'
       LETSENCRYPT_HOST: 'rosas.pics,www.rosas.pics'
       VIRTUAL_HOST: 'rosas.pics,www.rosas.pics'

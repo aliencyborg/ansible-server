@@ -4,6 +4,13 @@
     - metal
     - user
 
+- include: other-user.yml
+  become: yes
+  become_user: root
+  tags:
+    - metal
+    - other-user
+
 - include: host.yml
   tags:
     - metal

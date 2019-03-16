@@ -1,0 +1,12 @@
+---
+- name: pull and run vanadium-test
+  docker_container:
+    name: vanadium-test
+    image: aliencyborg/vanadium-test
+    pull: true
+    state: started
+    restart: yes
+    env:
+      LETSENCRYPT_EMAIL: 'ben@aliencyb.org'
+      LETSENCRYPT_HOST: 'test.vanadium.tech'
+      VIRTUAL_HOST: 'test.vanadium.tech'

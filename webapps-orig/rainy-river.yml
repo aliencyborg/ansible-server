@@ -1,0 +1,64 @@
+---
+- name: rainy-river backups container
+  docker_container:
+    image: mariadb:10.2
+    name: rainy-river-db-backups
+    state: present
+    volumes:
+      - /backups
+
+- name: rainy-river content container
+  docker_container:
+    image: wordpress:4.9
+    name: rainy-river-content
+    state: present
+    volumes:
+      - /var/www/html
+
+- name: rainy-river data container
+  docker_container:
+    image: mariadb:10.2
+    name: rainy-river-db-data
+    state: present
+    volumes:
+      - /var/lib/mysql
+
+- name: rainy-river db
+  docker_container:
+    env_file: rainy-river.env
+    image: mariadb:10.2
+    name: rainy-river-db
+    state: started
+    volumes:
+      - rainy-river-db-backups:/backups
+      - rainy-river-db-data:/var/lib/mysql
+
+- name: rainy-river web
+  docker_container:
+    env_file: rainy-river.env
+    exposed:
+      - 80
+      - 443
+    image: wordpress:4.9
+    name: rainy-river-wp
+    restart: yes
+    state: started
+    env:
+      LETSENCRYPT_EMAIL: 'ben@aliencyb.org'
+      LETSENCRYPT_HOST: 'rrwpress.aliencyb.org'
+      VIRTUAL_HOST: 'rrwpress.aliencyb.org'
+    links:
+      - "rainy-river-db:mysql"
+    volumes:
+      - rainy-river-content:/var/www/html
+
+- name: rainy-river ftp
+  docker_container:
+    command: rainy:$1$nbquHESY$.KlulEhDTQ8l3dVnBkVLk.:e:33:33
+    image: atmoz/sftp:latest
+    name: rainy-river-ftp
+    state: started
+    ports:
+      - "49322:22"
+    volumes:
+      - rainy-river-content:/home/rainy/upload
