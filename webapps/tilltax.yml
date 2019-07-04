@@ -29,19 +29,21 @@
         links:
           - "tilltax-db:db"
         env:
-          VIRTUAL_HOST: "api.tilltax.com"
+          LETSENCRYPT_EMAIL: "admin@aliencyb.org"
           LETSENCRYPT_HOST: "api.tilltax.com"
-          LETSENCRYPT_EMAIL: "thealiencyborg@gmail.com"
+          VIRTUAL_HOST: "api.tilltax.com"
 
     - name: tilltax web client
       docker_container:
-        name: tilltax-web
+        expose: 80
         image: aliencyborg/tilltax-web
-        pull: true
-        state: started
+        name: tilltax-web
+        pull: yes
         restart: yes
+        state: started
         env:
-          LETSENCRYPT_EMAIL: 'ben@aliencyb.org'
+          PORT: 80
+          LETSENCRYPT_EMAIL: 'admin@aliencyb.org'
           LETSENCRYPT_HOST: 'tilltax.com,www.tilltax.com'
           VIRTUAL_HOST: 'tilltax.com,www.tilltax.com'
 

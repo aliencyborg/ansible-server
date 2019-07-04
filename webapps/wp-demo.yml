@@ -1,0 +1,68 @@
+---
+- name: Demo Wordpress
+  hosts: localhost
+  become: True
+  tasks:
+    - name: wp-demo backups container
+      docker_container:
+        image: mariadb:10.4
+        name: wp-demo-db-backups
+        state: present
+        volumes:
+          - /backups
+
+    - name: wp-demo content container
+      docker_container:
+        image: wordpress:5.2
+        name: wp-demo-content
+        state: present
+        volumes:
+          - /var/www/html
+
+    - name: wp-demo data container
+      docker_container:
+        image: mariadb:10.4
+        name: wp-demo-db-data
+        state: present
+        volumes:
+          - /var/lib/mysql
+
+    - name: wp-demo db
+      docker_container:
+        env_file: wp-demo.env
+        image: mariadb:10.4
+        name: wp-demo-db
+        state: started
+        volumes:
+          - wp-demo-db-backups:/backups
+          - wp-demo-db-data:/var/lib/mysql
+
+    - name: wp-demo web
+      docker_container:
+        env_file: wp-demo.env
+        exposed:
+          - 80
+          - 443
+        image: wordpress:5.2
+        name: wp-demo-wp
+        restart: yes
+        state: started
+        env:
+          LETSENCRYPT_EMAIL: 'admin@aliencyb.org'
+          LETSENCRYPT_HOST: 'wp-demo.aliencyb.org'
+          VIRTUAL_HOST: 'wp-demo.aliencyb.org'
+        links:
+          - "wp-demo-db:mysql"
+        volumes:
+          - wp-demo-content:/var/www/html
+
+    - name: wp-demo ftp
+      docker_container:
+        command: alien:$1$hWpW8vAP$gsAo3vQzUCdSvhdIRLMz0/:e:33:33
+        image: atmoz/sftp:latest
+        name: wp-demo-ftp
+        state: started
+        ports:
+          - "49324:22"
+        volumes:
+          - wp-demo-content:/home/alien/upload

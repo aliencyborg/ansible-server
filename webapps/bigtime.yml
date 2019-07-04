@@ -5,9 +5,10 @@
   tasks:
     - docker_container:
         name: bigtime
-        image: aliencyborg/bigtime
-        pull: true
+        image: aliencyborg/bigtime:latest
+        pull: yes
         state: started
+        recreate: yes
         restart: yes
         env:
           LETSENCRYPT_EMAIL: 'ben@aliencyb.org'

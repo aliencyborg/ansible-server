@@ -3,13 +3,28 @@
   hosts: localhost
   become: True
   tasks:
-    - docker_container:
+    - name: AlienCyborg Homepage
+      docker_container:
+        image: aliencyborg/homepage:latest
         name: aliencyborg
-        image: aliencyborg/aliencyborg
         pull: true
-        state: started
         restart: yes
+        state: started
         env:
           LETSENCRYPT_EMAIL: 'ben@aliencyb.org'
           LETSENCRYPT_HOST: 'aliencyb.org,www.aliencyb.org,aliencyborg.net,www.aliencyborg.net'
           VIRTUAL_HOST: 'aliencyb.org,www.aliencyb.org,aliencyborg.net,www.aliencyborg.net'
+
+    - name: AlienCyborg Homepage Preview
+      docker_container:
+        expose: 80
+        image: aliencyborg/homepage:octane
+        name: aliencyborg-preview
+        pull: true
+        restart: yes
+        state: started
+        env:
+          PORT: 80
+          LETSENCRYPT_EMAIL: 'ben@aliencyb.org'
+          LETSENCRYPT_HOST: 'preview.aliencyb.org'
+          VIRTUAL_HOST: 'preview.aliencyb.org'

@@ -18,7 +18,8 @@
 
   # Web Applications
 - import_playbook: webapps/aliencyborg.yml
-- import_playbook: webapps/biscuitman-down.yml
+- import_playbook: webapps/bigtime.yml
 - import_playbook: webapps/bombaybreakdown.yml
 - import_playbook: webapps/chucklove.yml
+- import_playbook: webapps/shangry.yml
 - import_playbook: webapps/tilltax.yml

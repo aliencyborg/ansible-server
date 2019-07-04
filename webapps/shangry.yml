@@ -1,0 +1,17 @@
+---
+- name: Shangri-LA Shack Demo
+  hosts: localhost
+  become: True
+  tasks:
+    - name: Shangri-LA demo page
+      docker_container:
+        name: shangri-test
+        image: aliencyborg/shangri-lashow
+        pull: yes
+        state: started
+        recreate: yes
+        restart: yes
+        env:
+          LETSENCRYPT_EMAIL: 'ben@aliencyb.org'
+          LETSENCRYPT_HOST: 'shangrila.aliencyb.org,shangri-lashow.com,www.shangri-lashow.com'
+          VIRTUAL_HOST: 'shangrila.aliencyb.org,shangri-lashow.com,www.shangri-lashow.com'
