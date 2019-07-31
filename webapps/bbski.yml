@@ -6,13 +6,13 @@
     - name: Superkhana homepage
       docker_container:
         expose: 80
-        image: aliencyborg/bbski:latest
+        image: aliencyborg/bbski:demo-3
         name: bbski
         pull: yes
         restart: yes
         state: started
         env:
           PORT: 80
-          LETSENCRYPT_EMAIL: 'ben@aliencyb.org'
+          LETSENCRYPT_EMAIL: 'admin@aliencyb.org'
           LETSENCRYPT_HOST: 'superkhanachicago.com,www.superkhanachicago.com'
           VIRTUAL_HOST: 'superkhanachicago.com,www.superkhanachicago.com'

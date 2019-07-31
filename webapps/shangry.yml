@@ -5,13 +5,13 @@
   tasks:
     - name: Shangri-LA demo page
       docker_container:
-        name: shangri-test
+        name: shangri-lashow
         image: aliencyborg/shangri-lashow
         pull: yes
         state: started
         recreate: yes
         restart: yes
         env:
-          LETSENCRYPT_EMAIL: 'ben@aliencyb.org'
-          LETSENCRYPT_HOST: 'shangrila.aliencyb.org,shangri-lashow.com,www.shangri-lashow.com'
-          VIRTUAL_HOST: 'shangrila.aliencyb.org,shangri-lashow.com,www.shangri-lashow.com'
+          LETSENCRYPT_EMAIL: 'admin@aliencyb.org'
+          LETSENCRYPT_HOST: 'shangri-lashow.com,www.shangri-lashow.com'
+          VIRTUAL_HOST: 'shangri-lashow.com,www.shangri-lashow.com'
