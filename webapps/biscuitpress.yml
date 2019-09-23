@@ -48,9 +48,9 @@
         restart: yes
         state: started
         env:
-          LETSENCRYPT_EMAIL: 'admin@aliencyb.org'
-          LETSENCRYPT_HOST: 'bmpress.aliencyb.org,biscuitmanchicago.com,www.biscuitmanchicago.com'
-          VIRTUAL_HOST: 'bmpress.aliencyb.org,biscuitmanchicago.com,www.biscuitmanchicago.com'
+          LETSENCRYPT_EMAIL: "admin@aliencyb.org"
+          LETSENCRYPT_HOST: "bmpress.aliencyb.org,biscuitmanchicago.com,www.biscuitmanchicago.com"
+          VIRTUAL_HOST: "bmpress.aliencyb.org,biscuitmanchicago.com,www.biscuitmanchicago.com"
         links:
           - "biscuitpress-db:mysql"
         volumes:
@@ -66,3 +66,21 @@
           - "49222:22"
         volumes:
           - biscuitpress-content:/home/biscuitman/upload
+
+    - name: biscuitpress backer upper
+      docker_container:
+        env_file: biscuitpress.env
+        image: databack/mysql-backup
+        name: biscuitpress-backer-upper
+        restart: yes
+        user: 0
+        env:
+          DB_DUMP_BEGIN: "0330"
+          DB_DUMP_FREQ: "10080" # 1 week in minutes
+          #RUN_ONCE: true
+          DB_DUMP_TARGET: "/db"
+          DB_SERVER: "biscuitpress-db"
+        links:
+          - "biscuitpress-db"
+        volumes:
+          - biscuitpress-db-backups:/db
