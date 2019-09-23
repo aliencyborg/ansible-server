@@ -49,8 +49,8 @@
         state: started
         env:
           LETSENCRYPT_EMAIL: 'admin@aliencyb.org'
-          LETSENCRYPT_HOST: 'ctp.aliencyb.org'
-          VIRTUAL_HOST: 'ctp.aliencyb.org'
+          LETSENCRYPT_HOST: 'ctheplatypus.com,ctp.aliencyb.org'
+          VIRTUAL_HOST: 'ctheplatypus.com,ctp.aliencyb.org'
         links:
           - "ctp-wp-db:mysql"
         volumes:
