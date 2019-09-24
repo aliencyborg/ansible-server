@@ -40,17 +40,18 @@
     - name: biscuitpress web
       docker_container:
         env_file: biscuitpress.env
-        exposed:
-          - 80
-          - 443
+        hostname: 'biscuitmanchicago.com'
         image: wordpress:4.8-php7.1
         name: biscuitpress-wp
         restart: yes
         state: started
         env:
           LETSENCRYPT_EMAIL: "admin@aliencyb.org"
-          LETSENCRYPT_HOST: "bmpress.aliencyb.org,biscuitmanchicago.com,www.biscuitmanchicago.com"
-          VIRTUAL_HOST: "bmpress.aliencyb.org,biscuitmanchicago.com,www.biscuitmanchicago.com"
+          LETSENCRYPT_HOST: "biscuitmanchicago.com,www.biscuitmanchicago.com"
+          VIRTUAL_HOST: "biscuitmanchicago.com,www.biscuitmanchicago.com"
+        exposed:
+          - 80
+          - 443
         links:
           - "biscuitpress-db:mysql"
         volumes:
