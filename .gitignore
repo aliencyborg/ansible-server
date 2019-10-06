@@ -3,3 +3,4 @@
 *-vars.yml
 
 host_vars/localhost.yml
+hosts.yml
