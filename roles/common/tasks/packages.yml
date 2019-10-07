@@ -9,6 +9,8 @@
       - ack
       - ctags
       - curl
+      - docker
+      - docker-compose
       - emacs
       - git
       - htop

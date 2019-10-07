@@ -2,5 +2,8 @@
 *.retry
 
 hosts.yml
+
+/group_vars/*.yml
+!/group_vars/*.example.yml
 /host_vars/*.yml
 !/host_vars/*.example.yml

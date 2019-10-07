@@ -1,0 +1,5 @@
+---
+- import_tasks: docker.yml
+- import_tasks: nginx-proxy.yml
+- import_tasks: docker-gen.yml
+- import_tasks: nginx-letsencrypt.yml

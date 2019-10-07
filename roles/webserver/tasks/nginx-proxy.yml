@@ -1,0 +1,13 @@
+---
+- name: Run public-facing nginx-proxy container
+  docker_container:
+    image: nginx
+    name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/nginx/certs
+      - /etc/nginx/conf.d
+      - /etc/nginx/vhost.d
+      - /usr/share/nginx/html
