@@ -1,8 +1,0 @@
----
-- hosts: warlock
-  remote_user: root
-  roles:
-    - common
-    - metal
-    - development
-    - laptop

@@ -1,8 +1,0 @@
----
-- hosts: thebeast
-  remote_user: root
-  roles:
-    - common
-    - metal
-    - webserver
-    - webapps
