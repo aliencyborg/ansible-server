@@ -1,6 +1,22 @@
 ---
-- name: install sudo
+- name: install packages
   pacman:
-    name: sudo
+    name: "{{ packages }}"
     state: present
     update_cache: yes
+  vars:
+    packages:
+      - ack
+      - ctags
+      - curl
+      - emacs
+      - git
+      - htop
+      - jnettop
+      - openssh
+      - reflector
+      - sudo
+      - tmux
+      - unzip
+      - vim
+      - wget
