@@ -1,6 +1,6 @@
 *.env
 *.retry
-*-vars.yml
 
-host_vars/localhost.yml
 hosts.yml
+/host_vars/*.yml
+!/host_vars/*.example.yml
