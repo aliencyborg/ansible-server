@@ -1,0 +1,6 @@
+---
+- name: install sudo
+  pacman:
+    name: sudo
+    state: present
+    update_cache: yes

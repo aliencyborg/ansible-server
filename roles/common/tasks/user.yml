@@ -1,0 +1,19 @@
+---
+- name: create normal user
+  user:
+    createhome: yes
+    group: users
+    groups: wheel
+    name: "{{ username }}"
+    password: "{{ userpassword }}"
+
+- name: ensure /etc/sudoers.d directory is present
+  file:
+    path: /etc/sudoers.d
+    state: directory
+
+- name: add user to sudoers
+  template:
+    src: sudoers.j2
+    dest: /etc/sudoers.d/10_{{ username }}
+    validate: visudo -cf %s
