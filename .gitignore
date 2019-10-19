@@ -1,6 +1,7 @@
 *.env
 *.retry
 
+hosts
 hosts.yml
 
 /group_vars/*.yml
