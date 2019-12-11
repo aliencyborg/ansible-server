@@ -1,8 +1,9 @@
 ---
 - name: Run nginx-proxy letsencrypt companion
   docker_container:
-    image: jrcs/letsencrypt-nginx-proxy-companion
+    image: jrcs/letsencrypt-nginx-proxy-companion:latest
     name: nginx-proxy-letsencrypt
+    pull: true
     env:
       DEBUG: "true"
       DEFAULT_EMAIL: "{{ ADMIN_EMAIL }}"

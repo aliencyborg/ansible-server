@@ -1,8 +1,9 @@
 ---
 - name: Run public-facing nginx-proxy container
   docker_container:
-    image: nginx
+    image: nginx:latest
     name: nginx-proxy
+    pull: true
     ports:
       - "80:80"
       - "443:443"
