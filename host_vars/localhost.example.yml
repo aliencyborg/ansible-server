@@ -2,4 +2,4 @@
 hostname: machine
 username: human
 userpassword: "secret$$$hash$$$"
-# see docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-crypted-passwords-for-the-user-module
+# see https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module
