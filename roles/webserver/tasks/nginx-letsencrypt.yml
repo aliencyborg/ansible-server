@@ -5,7 +5,7 @@
     name: nginx-proxy-letsencrypt
     pull: true
     env:
-      DEBUG: "true"
+      DEBUG: "{{ LETSENCRYPT_DEBUG }}"
       DEFAULT_EMAIL: "{{ ADMIN_EMAIL }}"
       NGINX_DOCKER_GEN_CONTAINER: "nginx-proxy-gen"
     volumes:

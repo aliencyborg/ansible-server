@@ -1,2 +1,3 @@
 ---
 ADMIN_EMAIL: admin@example.com
+LETSENCRYPT_DEBUG: false
