@@ -19,6 +19,7 @@
       - reflector
       - sudo
       - tmux
+      - tree
       - unzip
       - vim
       - wget
