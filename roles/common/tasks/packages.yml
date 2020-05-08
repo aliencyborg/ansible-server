@@ -13,6 +13,7 @@
       - docker-compose
       - emacs
       - git
+      - gptfdisk
       - htop
       - jnettop
       - openssh
