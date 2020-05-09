@@ -19,6 +19,7 @@
       - jnettop
       - openssh
       - reflector
+      - rsync
       - sudo
       - tmux
       - tree
