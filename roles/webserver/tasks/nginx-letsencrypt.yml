@@ -4,6 +4,7 @@
     image: jrcs/letsencrypt-nginx-proxy-companion:latest
     name: nginx-proxy-letsencrypt
     pull: true
+    restart_policy: always
     env:
       DEBUG: "{{ LETSENCRYPT_DEBUG }}"
       DEFAULT_EMAIL: "{{ ADMIN_EMAIL }}"

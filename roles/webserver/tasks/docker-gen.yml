@@ -14,6 +14,7 @@
     image: jwilder/docker-gen:latest
     name: nginx-proxy-gen
     pull: true
+    restart_policy: always
     volumes:
       - /usr/local/etc/nginx/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
