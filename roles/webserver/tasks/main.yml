@@ -2,8 +2,10 @@
 - import_tasks: docker.yml
   tags: server
 - import_tasks: nginx-proxy.yml
-  tags: server
+  tags: [server, nginx]
 - import_tasks: docker-gen.yml
   tags: server
 - import_tasks: nginx-letsencrypt.yml
-  tags: server
+  tags: [server, nginx]
+- import_tasks: packetbeat.yml
+  tags: [server, packetbeat]

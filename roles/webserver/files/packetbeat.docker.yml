@@ -1,0 +1,47 @@
+packetbeat.interfaces.device: any
+
+packetbeat.flows:
+  timeout: 30s
+  period: 10s
+
+packetbeat.procs.enabled: true
+setup.ilm.overwrite: true
+setup.kibana.host: "http://kibana.aliencyb.org/50601"
+
+packetbeat.protocols.dns:
+  ports: [53]
+  include_authorities: true
+  include_additionals: true
+
+packetbeat.protocols.http:
+  ports: [80, 5601, 9200, 8080, 8081, 5000, 8002, 3000, 4040, 2368, 3123]
+
+packetbeat.protocols.memcache:
+  ports: [11211]
+
+packetbeat.protocols.mysql:
+  ports: [3306]
+
+packetbeat.protocols.pgsql:
+  ports: [5432]
+
+packetbeat.protocols.redis:
+  ports: [6379]
+
+packetbeat.protocols.thrift:
+  ports: [9090]
+
+packetbeat.protocols.mongodb:
+  ports: [27017]
+
+packetbeat.protocols.cassandra:
+  ports: [9042]
+
+processors:
+- add_cloud_metadata: ~
+
+output.elasticsearch:
+  hosts: ["http://es.aliencyb.org:59200"]
+  #hosts: '${ELASTICSEARCH_HOSTS:elasticsearch:9200}'
+  #username: '${ELASTICSEARCH_USERNAME:}'
+  #password: '${ELASTICSEARCH_PASSWORD:}'
