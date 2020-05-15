@@ -1,0 +1,15 @@
+# any 32+length alphanumeric string
+xpack.encryptedSavedObjects.encryptionKey: 'nl6o5c0hm5xxk6y8q5yxj82mnmeg1j09'
+
+server:
+  name: localhost
+  ssl:
+    enabled: true
+    key: /usr/share/elasticsearch/config/certificates/kib01/kib01.key
+    certificate: /usr/share/elasticsearch/config/certificates/kib01/kib01.crt
+
+elasticsearch:
+  hosts: https://elastic-es:9200
+  ssl.certificate_authorities: /usr/share/elasticsearch/config/certificates/ca/ca.crt
+  url: https://elastic-es:9200
+  username: kibana

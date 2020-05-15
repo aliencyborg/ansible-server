@@ -1,20 +1,48 @@
 heartbeat.monitors:
 - type: http
-  schedule: '@every 5s'
-  urls:
-    - http://elasticsearch:9200
-    - http://kibana:5601
+  id: aliencyborg
+  name: AlienCyb.org Status
+  hosts: ["https://aliencyb.org", "https://www.aliencyb.org"]
+  check.response.status: [200]
+  schedule: '@every 300s'
 
-- type: icmp
-  schedule: '@every 5s'
-  hosts:
-    - elasticsearch
-    - kibana
+- type: http
+  id: biscuitman
+  name: Biscuitman Status
+  hosts: ["https://biscuitmanchicago.com", "https://www.biscuitmanchicago.com"]
+  check.response.status: [200]
+  schedule: '@every 300s'
 
-processors:
-- add_cloud_metadata: ~
+- type: http
+  id: shangri-la
+  name: Shangri-LA Status
+  hosts: ["https://shangri-lashow.com", "https://www.shangri-lashow.com", "bigtime.aliencyb.org"]
+  check.response.status: [200]
+  schedule: '@every 300s'
+
+- type: http
+  id: tilltax
+  name: TillTax Status
+  hosts: ["https://tilltax.com", "https://www.tilltax.com"]
+  check.response.status: [200]
+  schedule: '@every 300s'
+
+- type: http
+  id: sudo-science
+  name: SudoScience Status
+  hosts: ["https://sudo-science.com", "https://www.sudo-science.com"]
+  check.response.status: [200]
+  schedule: '@every 300s'
+
+- type: http
+  id: ctheplatypus
+  name: CthePlatypus Status
+  hosts: ["https://ctheplatypus.com", "https://www.ctheplatypus.com"]
+  check.response.status: [200]
+  schedule: '@every 300s'
 
 output.elasticsearch:
-  hosts: '${ELASTICSEARCH_HOSTS:elasticsearch:9200}'
-  username: '${ELASTICSEARCH_USERNAME:}'
-  password: '${ELASTICSEARCH_PASSWORD:}'
+  #hosts: '${ELASTICSEARCH_HOSTS:https://es.aliencyb.org}'
+  hosts: '${ELASTICSEARCH_HOSTS:https://elastic-es:9200}'
+  #username: '${ELASTICSEARCH_USERNAME:}'
+  #password: '${ELASTICSEARCH_PASSWORD:}'

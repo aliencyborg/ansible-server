@@ -6,7 +6,8 @@ packetbeat.flows:
 
 packetbeat.procs.enabled: true
 setup.ilm.overwrite: true
-setup.kibana.host: "http://kibana.aliencyb.org/50601"
+#setup.kibana.host: "https://kibana.aliencyb.org"
+setup.kibana.host: "http://elastic-kibana:5601"
 
 packetbeat.protocols.dns:
   ports: [53]
@@ -16,8 +17,11 @@ packetbeat.protocols.dns:
 packetbeat.protocols.http:
   ports: [80, 5601, 9200, 8080, 8081, 5000, 8002, 3000, 4040, 2368, 3123]
 
-packetbeat.protocols.memcache:
-  ports: [11211]
+packetbeat.protocols.tls:
+  ports: [443, 993, 995, 5223, 8443, 8883, 9243]
+
+packetbeat.protocols.dhcpv4:
+  ports: [67, 68]
 
 packetbeat.protocols.mysql:
   ports: [3306]
@@ -25,23 +29,14 @@ packetbeat.protocols.mysql:
 packetbeat.protocols.pgsql:
   ports: [5432]
 
-packetbeat.protocols.redis:
-  ports: [6379]
-
-packetbeat.protocols.thrift:
-  ports: [9090]
-
 packetbeat.protocols.mongodb:
   ports: [27017]
 
-packetbeat.protocols.cassandra:
-  ports: [9042]
-
-processors:
-- add_cloud_metadata: ~
+packetbeat.protocols.ssh:
+  ports: [22, 43722]
 
 output.elasticsearch:
-  hosts: ["http://es.aliencyb.org:59200"]
+  hosts: ["https://es.aliencyb.org"]
   #hosts: '${ELASTICSEARCH_HOSTS:elasticsearch:9200}'
   #username: '${ELASTICSEARCH_USERNAME:}'
   #password: '${ELASTICSEARCH_PASSWORD:}'

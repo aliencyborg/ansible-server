@@ -1,0 +1,179 @@
+---
+- name: ensure /usr/local/share/elastic directory is present
+  file:
+    path: /usr/local/share/elastic/certs
+    state: directory
+
+- name: copy elasticsearch01.yml file
+  copy:
+    src: elasticsearch01.yml
+    dest: /usr/local/share/elastic
+
+- name: copy elasticsearch02.yml file
+  copy:
+    src: elasticsearch02.yml
+    dest: /usr/local/share/elastic
+
+- name: copy heartbeat.docker.yml file
+  copy:
+    src: heartbeat.docker.yml
+    dest: /usr/local/share/elastic
+
+- name: copy instances.yml file
+  copy:
+    src: instances.yml
+    dest: /usr/local/share/elastic
+
+- name: copy kibana.yml file
+  copy:
+    src: kibana.yml
+    dest: /usr/local/share/elastic
+
+- name: copy packetbeat.docker.yml file
+  copy:
+    src: packetbeat.docker.yml
+    dest: /usr/local/share/elastic
+
+- name: ensure elasticsearch data01 volume
+  docker_container:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.7.0
+    name: elastic-es-data01
+    state: stopped
+    volumes:
+      - /usr/share/elasticsearch/data
+
+- name: ensure elasticsearch data02 volume
+  docker_container:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.7.0
+    name: elastic-es-data02
+    state: stopped
+    volumes:
+      - /usr/share/elasticsearch/data
+
+- name: create a network
+  docker_network:
+    name: elastic
+
+- name: create certs
+  docker_container:
+    name: elastic-cert-maker
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.7.0
+    #recreate: yes
+    networks_cli_compatible: yes
+    network_mode: bridge
+    user: "0"
+    command: >
+      bash -c '
+        if [[ ! -f /certs/bundle.zip ]]; then
+          bin/elasticsearch-certutil cert --silent --pem --in config/certificates/instances.yml -out /certs/bundle.zip;
+          unzip /certs/bundle.zip -d /certs;
+        fi;
+        chown -R 1000:0 /certs
+      '
+    networks:
+      - name: elastic
+    volumes:
+    - /usr/local/share/elastic/instances.yml:/usr/share/elasticsearch/config/certificates/instances.yml
+    - /usr/local/share/elastic/certs:/certs
+    #volumes_from:
+      #- elastic-es-certs
+
+- name: set vm.max_map_count
+  sysctl:
+    name: vm.max_map_count
+    value: "262144"
+
+- name: run elasticsearch container 01
+  docker_container:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.7.0
+    name: elastic-es01
+    networks_cli_compatible: yes
+    network_mode: bridge
+    recreate: yes
+    restart_policy: always
+    env:
+      ELASTIC_PASSWORD: "{{ elastic_password }}"
+      #ES_JAVA_OPTS: "-Xms512m -Xmx512m -Des.enforce.bootstrap.checks=true"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    published_ports:
+      - "9200:9200"
+    healthcheck:
+      test: curl --cacert /usr/share/elasticsearch/config/certificates/ca/ca.crt -s https://localhost:9200 \
+        >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - name: elastic
+    ulimits:
+      - "memlock:-1:-1"
+    volumes:
+      - /usr/local/share/elastic/elasticsearch01.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - /usr/local/share/elastic/certs:/usr/share/elasticsearch/config/certificates
+    volumes_from:
+      - elastic-es-data01
+      #- elastic-es-certs
+
+- name: run elasticsearch container 02
+  docker_container:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.7.0
+    name: elastic-es02
+    networks_cli_compatible: yes
+    network_mode: bridge
+    recreate: yes
+    restart_policy: always
+    env:
+      ELASTIC_PASSWORD: "{{ elastic_password }}"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    networks:
+      - name: elastic
+    ulimits:
+      - "memlock:-1:-1"
+    volumes:
+      - /usr/local/share/elastic/elasticsearch02.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - /usr/local/share/elastic/certs:/usr/share/elasticsearch/config/certificates
+    volumes_from:
+      - elastic-es-data02
+      #- elastic-es-certs
+
+#- name: run kibana container
+  #docker_container:
+    #image: docker.elastic.co/kibana/kibana:7.7.0
+    #name: elastic-kibana
+    #recreate: yes
+    #restart_policy: always
+    #env:
+      #ELASTICSEARCH_PASSWORD: "{{ elastic_password }}"
+    #exposed_ports:
+      #- "5601:5601"
+    #volumes:
+      #- /usr/local/share/elastic/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
+      #- /usr/local/share/elastic/certs:/usr/share/elasticsearch/config/certificates
+    #volumes_from:
+      #- elastic-es-certs
+
+#- name: run heartbeat container
+  #docker_container:
+    #command: "--strict.perms=false -e -E output.elasticsearch.hosts=['https://elastic-es:9200']"
+    #image: docker.elastic.co/beats/heartbeat:7.7.0
+    #name: elastic-heartbeat
+    #network_mode: host
+    #restart_policy: always
+    #user: heartbeat
+    #volumes:
+      #- /usr/local/share/elastic/heartbeat.docker.yml:/usr/share/heartbeat/heartbeat.yml:ro
+
+#- name: run packetbeat container
+  #docker_container:
+    #command: "--strict.perms=false -e -E output.elasticsearch.hosts=['https://elastic-es:9200']"
+    #image: docker.elastic.co/beats/packetbeat:7.7.0
+    #name: packetbeat
+    ##network_mode: host
+    #recreate: yes
+    #user: packetbeat
+    #capabilities:
+      #- NET_ADMIN
+      #- NET_RAW
+    #volumes:
+      #- /usr/local/share/elastic/packetbeat.docker.yml:/usr/share/packetbeat/packetbeat.yml:ro
+

@@ -1,0 +1,33 @@
+bootstrap.memory_lock: true
+
+node.name: elastic-es02
+
+cluster:
+  initial_master_nodes:
+    - elastic-es01
+    - elastic-es02
+  name: elastic-es-cluster
+
+discovery:
+  seed_hosts:
+    - elastic-es01
+
+logger.org.elasticsearch:
+  cluster.coordination.ClusterBootstrapService: TRACE
+  #discovery: TRACE
+
+xpack:
+  license.self_generated.type: trial
+  security:
+    enabled: true
+    http.ssl:
+      certificate: /usr/share/elasticsearch/config/certificates/elastic-es02/elastic-es02.crt
+      certificate_authorities: /usr/share/elasticsearch/config/certificates/ca/ca.crt
+      enabled: true
+      key: /usr/share/elasticsearch/config/certificates/elastic-es02/elastic-es02.key
+    transport.ssl:
+      certificate: /usr/share/elasticsearch/config/certificates/elastic-es02/elastic-es02.crt
+      certificate_authorities: /usr/share/elasticsearch/config/certificates/ca/ca.crt
+      enabled: true
+      key: /usr/share/elasticsearch/config/certificates/elastic-es02/elastic-es02.key
+      verification_mode: certificate

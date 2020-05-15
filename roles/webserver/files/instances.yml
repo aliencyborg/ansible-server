@@ -1,0 +1,19 @@
+instances:
+  - name: elastic-es01
+    dns:
+      - elastic-es01
+      - localhost
+    ip:
+      - 127.0.0.1
+
+  - name: elastic-es02
+    dns:
+      - elastic-es02
+      - localhost
+    ip:
+      - 127.0.0.1
+
+  - name: kib01
+    dns:
+      - elastic-kibana
+      - localhost
