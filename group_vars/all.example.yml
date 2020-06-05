@@ -1,4 +1,4 @@
 ---
-ACME_CA_URI: "https://acme-staging-v02.api.letsencrypt.org/directory"
+ACME_STAGE_URI: "https://acme-staging-v02.api.letsencrypt.org/directory"
 ADMIN_EMAIL: "admin@example.com"
 LETSENCRYPT_DEBUG: "false"

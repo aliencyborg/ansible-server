@@ -8,7 +8,7 @@
     restart_policy: always
     env:
       # uncomment for letsencrypt dry-run:
-      #ACME_CA_URI: "{{ ACME_CA_URI }}"
+      #ACME_CA_URI: "{{ ACME_STAGE_URI }}"
       DEBUG: "{{ LETSENCRYPT_DEBUG }}"
       DEFAULT_EMAIL: "{{ ADMIN_EMAIL }}"
       NGINX_DOCKER_GEN_CONTAINER: "nginx-proxy-gen"
