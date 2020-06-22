@@ -1,9 +1,7 @@
 ---
-- import_tasks: docker.yml
-  tags: server
 - import_tasks: nginx-proxy.yml
-  tags: server
+  tags: webserver
 - import_tasks: docker-gen.yml
-  tags: server
+  tags: webserver
 - import_tasks: nginx-letsencrypt.yml
-  tags: server
+  tags: webserver

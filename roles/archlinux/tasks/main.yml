@@ -1,0 +1,9 @@
+---
+- import_tasks: packages.yml
+  tags: [arch, packages]
+- import_tasks: hostname.yml
+  tags: [arch, host]
+- import_tasks: user.yml
+  tags: [arch, host]
+- import_tasks: docker.yml
+  tags: [arch, host]

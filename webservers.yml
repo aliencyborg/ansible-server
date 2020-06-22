@@ -1,5 +1,10 @@
 ---
-- hosts: webservers
+- hosts: archlinux
   roles:
-    - common
+    - archlinux
+    - webserver
+
+- hosts: clearlinux
+  roles:
+    - clearlinux
     - webserver

@@ -1,7 +1,0 @@
----
-- import_tasks: packages.yml
-  tags: [common, packages]
-- import_tasks: hostname.yml
-  tags: [common, host]
-- import_tasks: user.yml
-  tags: [common, host]

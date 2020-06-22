@@ -3,7 +3,8 @@
   user:
     createhome: yes
     group: users
-    groups: wheel
+    groups:
+    - wheel
     name: "{{ username }}"
     password: "{{ userpassword }}"
 

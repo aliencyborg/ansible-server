@@ -3,3 +3,8 @@ hostname: machine
 username: human
 userpassword: "secret$$$hash$$$"
 # see https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module
+
+# uncomment for letsencrypt dry-run:
+# ACME_STAGE_URI: "https://acme-staging-v02.api.letsencrypt.org/directory"
+# uncomment for letsencrypt debug
+# LETSENCRYPT_DEBUG: "true"

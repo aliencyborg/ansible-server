@@ -1,0 +1,12 @@
+---
+- name: update OS to latest version
+  swupd:
+    update: yes
+
+- name: install software bundles
+  swupd:
+    name: "{{ item }}"
+  with_items:
+    - containers-basic
+    - sysadmin-remote
+    - vim

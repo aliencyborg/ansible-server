@@ -1,0 +1,8 @@
+---
+- import_tasks: sftp.yml
+  tags: [clear, host]
+- import_tasks: packages.yml
+  tags: [clear, packages]
+- import_tasks: docker.yml
+  tags: [clear, host]
+  
