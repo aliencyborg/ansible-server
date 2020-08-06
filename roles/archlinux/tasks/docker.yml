@@ -6,8 +6,8 @@
 
 - name: copy daemon.json file
   copy:
-    src: daemon.json
     dest: /etc/docker/daemon.json
+    src: daemon.json
 
 - name: ensure the docker.service.d directory is present
   file:
@@ -16,17 +16,18 @@
 
 - name: copy override.conf file
   copy:
-    src: override.conf
     dest: /etc/systemd/system/docker.service.d/override.conf
+    src: override.conf
 
 - name: enable docker service
   service:
-    name: docker
     enabled: yes
+    name: docker
     state: started
 
 - name: add user to docker group
   user:
-    name: "{{ username }}"
-    groups: docker
     append: yes
+    name: "{{ username }}"
+    groups:
+      - docker
