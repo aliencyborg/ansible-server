@@ -1,0 +1,4 @@
+- import_tasks: packages.yml
+  tags: [ubuntu, packages]
+- import_tasks: docker.yml
+  tags: [ubuntu, host]

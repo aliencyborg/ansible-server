@@ -1,0 +1,9 @@
+---
+- name: install packages
+  package:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - docker
+      - docker-compose

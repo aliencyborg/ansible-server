@@ -8,3 +8,8 @@
   roles:
     - clearlinux
     - webserver
+
+- hosts: ubuntu
+  roles:
+    - ubuntu
+    - webserver
