@@ -19,15 +19,15 @@
     dest: /etc/systemd/system/docker.service.d/override.conf
     src: override.conf
 
-- name: enable docker service
-  service:
-    enabled: yes
-    name: docker
-    state: started
-
 - name: add user to docker group
   user:
     append: yes
     name: "{{ username }}"
     groups:
       - docker
+
+- name: enable docker service
+  service:
+    enabled: yes
+    name: docker
+    state: started

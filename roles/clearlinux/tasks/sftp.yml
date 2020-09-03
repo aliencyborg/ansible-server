@@ -1,10 +1,10 @@
 ---
-  - name: ensure sshd_config exists
-    file:
-      path: /etc/ssh/sshd_config
-      state: touch
+- name: ensure sshd_config exists
+  file:
+    path: /etc/ssh/sshd_config
+    state: touch
 
-  - name: enable the sftp subsystem
-    lineinfile:
-      line: "subsystem sftp /usr/libexec/sftp-server"
-      path: /etc/ssh/sshd_config
+- name: enable the sftp subsystem
+  lineinfile:
+    line: "subsystem sftp /usr/libexec/sftp-server"
+    path: /etc/ssh/sshd_config
