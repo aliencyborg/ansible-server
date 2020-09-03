@@ -1,16 +1,8 @@
 ---
-- hosts: archlinux 
+- hosts: archlinux
   gather_facts: False
   pre_tasks:
     - name: install python
       raw: test -e /usr/bin/python || (pacman -S --noconfirm python)
-      register: output
-      changed_when: output.stdout
-
-- hosts: clearlinux 
-  gather_facts: False
-  pre_tasks:
-    - name: install python
-      raw: test -e /usr/bin/python || (swupd bundle-add python-basic)
       register: output
       changed_when: output.stdout
