@@ -1,18 +1,28 @@
 ---
-  - name: ensure the docker group exists
-    group:
-      name: docker
-      state: present
+- name: ensure the /etc/docker directory is present
+  file:
+    path: /etc/docker
+    state: directory
 
-  - name: add user to docker group
-    user:
-     name: "{{ username }}"
-     groups:
+- name: copy daemon.json file
+  copy:
+    dest: /etc/docker/daemon.json
+    src: daemon.json
+
+- name: ensure the docker group exists
+  group:
+    name: docker
+    state: present
+
+- name: add user to docker group
+  user:
+    name: "{{ username }}"
+    groups:
       - docker
-     append: yes
+    append: yes
 
-  - name: enable docker service
-    service:
-      name: docker
-      enabled: yes
-      state: started
+- name: enable docker service
+  service:
+    name: docker
+    enabled: yes
+    state: started
