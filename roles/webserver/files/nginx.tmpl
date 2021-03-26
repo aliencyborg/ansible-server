@@ -1,5 +1,5 @@
 # curl https://raw.githubusercontent.com/nginx-proxy/nginx-proxy/master/nginx.tmpl
-# last downloaded on 02-Sep-2020
+# last downloaded on 26-Mar-2021
 
 {{ $CurrentContainer := where $ "ID" .Docker.CurrentContainerID | first }}
 
@@ -256,8 +256,9 @@ server {
 	{{ $access_log }}
 	
 	# Do not HTTPS redirect Let'sEncrypt ACME challenge
-	location /.well-known/acme-challenge/ {
+	location ^~ /.well-known/acme-challenge/ {
 		auth_basic off;
+		auth_request off;
 		allow all;
 		root /usr/share/nginx/html;
 		try_files $uri =404;
