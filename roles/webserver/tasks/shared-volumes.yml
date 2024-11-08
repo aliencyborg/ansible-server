@@ -1,0 +1,8 @@
+- name: Define shared volumes
+  docker_volume:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - nginx_certs
+    - nginx_vhost_d
+    - nginx_html

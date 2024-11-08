@@ -1,4 +1,3 @@
----
 - name: Run nginx-proxy letsencrypt companion
   docker_container:
     image: jrcs/letsencrypt-nginx-proxy-companion:latest

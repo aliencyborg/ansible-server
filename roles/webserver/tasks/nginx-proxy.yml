@@ -1,18 +1,7 @@
----
-- name: ensure /usr/local/etc/nginx directory is present
-  file:
-    path: /usr/local/etc/nginx
-    state: directory
-
-- name: copy custom_proxy_settings file
-  copy:
-    src: custom_proxy_settings.conf
-    dest: /usr/local/etc/nginx/
-
 - name: Run public-facing nginx-proxy container
   docker_container:
-    image: nginx:latest
     name: nginx-proxy
+    image: nginxproxy/nginx-proxy:latest
     pull: true
     restart_policy: always
     env:
@@ -21,8 +10,8 @@
       - "80:80"
       - "443:443"
     volumes:
-      - /usr/local/etc/nginx/custom_proxy_settings.conf:/etc/nginx/conf.d/custom_proxy_settings.conf
-      - /etc/nginx/certs
-      - /etc/nginx/conf.d
-      - /etc/nginx/vhost.d
-      - /usr/share/nginx/html
+      - nginx_certs:/etc/nginx/certs:ro
+      - nginx_vhost.d:/etc/nginx/vhost.d
+      - nginx_html:/usr/share/nginx/html
+    networks:
+      - name: proxy_network

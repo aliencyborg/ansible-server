@@ -1,25 +1,17 @@
----
-- name: ensure /usr/local/etc/nginx directory is present
-  file:
-    path: /usr/local/etc/nginx
-    state: directory
-
-- name: copy nginx.tmpl file
-  copy:
-    src: nginx.tmpl
-    dest: /usr/local/etc/nginx/nginx.tmpl
-
-- name: pull and run docker-gen container
+- name: Run docker-gen container
   docker_container:
-    image: jwilder/docker-gen:latest
     name: nginx-proxy-gen
+    image: nginxproxy/docker-gen:latest
     pull: true
     restart_policy: always
     volumes:
-      - /usr/local/etc/nginx/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
-    volumes_from:
-      - nginx-proxy
-    entrypoint: "/usr/local/bin/docker-gen -notify-sighup nginx-proxy -watch
-      -wait 5s:30s /etc/docker-gen/templates/nginx.tmpl
-      /etc/nginx/conf.d/default.conf"
+      - nginx_vhost.d:/etc/nginx/vhost.d
+      - nginx_certs:/etc/nginx/certs:ro
+    entrypoint: >
+      /usr/local/bin/docker-gen
+      -notify-sighup nginx-proxy
+      -watch
+      /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
+    networks:
+      - name: proxy_network

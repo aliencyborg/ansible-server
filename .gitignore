@@ -1,6 +1,8 @@
 *.env
 *.retry
 
+inventory
+
 hosts
 hosts.yml
 
