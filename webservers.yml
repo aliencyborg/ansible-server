@@ -1,15 +1,4 @@
 ---
-- hosts: archlinux
+- hosts: webservers
   roles:
-    - archlinux
-    - webserver
-
-- hosts: clearlinux
-  roles:
-    - clearlinux
-    - webserver
-
-- hosts: ubuntu
-  roles:
-    - ubuntu
-    - webserver
+    - role: webserver
