@@ -11,7 +11,7 @@
       - "443:443"
     volumes:
       - nginx_certs:/etc/nginx/certs:ro
-      - nginx_vhost.d:/etc/nginx/vhost.d
+      - nginx_conf:/etc/nginx/conf.d
       - nginx_html:/usr/share/nginx/html
-    networks:
-      - name: proxy_network
+      - nginx_vhost:/etc/nginx/vhost.d
+      - /var/run/docker.sock:/tmp/docker.sock:ro

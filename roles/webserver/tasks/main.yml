@@ -1,11 +1,7 @@
 ---
 - import_tasks: shared-volumes.yml
   tags: webserver
-- import_tasks: proxy-network.yml
-  tags: webserver
 - import_tasks: nginx-proxy.yml
-  tags: webserver
-- import_tasks: docker-gen.yml
   tags: webserver
 - import_tasks: acme-companion.yml
   tags: webserver

@@ -6,10 +6,11 @@
     restart_policy: always
     env:
       DEFAULT_EMAIL: "{{ ADMIN_EMAIL }}"
-      NGINX_DOCKER_GEN_CONTAINER: "nginx-proxy-gen"
+      NGINX_PROXY_CONTAINER: "nginx-proxy"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - nginx_acme:/etc/acme.sh
       - nginx_certs:/etc/nginx/certs
+      - nginx_conf:/etc/nginx/conf.d
       - nginx_html:/usr/share/nginx/html
-    networks:
-      - name: proxy_network
+      - nginx_vhost:/etc/nginx/vhost.d
+      - /var/run/docker.sock:/var/run/docker.sock:ro

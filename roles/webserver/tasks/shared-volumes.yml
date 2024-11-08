@@ -3,6 +3,8 @@
     name: "{{ item }}"
     state: present
   loop:
+    - nginx_acme
     - nginx_certs
-    - nginx_vhost_d
+    - nginx_conf
     - nginx_html
+    - nginx_vhost
