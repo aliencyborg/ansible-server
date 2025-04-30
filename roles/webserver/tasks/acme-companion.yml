@@ -10,7 +10,6 @@
     volumes:
       - nginx_acme:/etc/acme.sh
       - nginx_certs:/etc/nginx/certs
-      - nginx_conf:/etc/nginx/conf.d
       - nginx_html:/usr/share/nginx/html
       - nginx_vhost:/etc/nginx/vhost.d
       - /var/run/docker.sock:/var/run/docker.sock:ro

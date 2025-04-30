@@ -1,3 +1,17 @@
+- name: Ensure custom nginx conf directory exists
+  become: true
+  ansible.builtin.file:
+    path: /etc/ansible-server/nginx/conf.d/
+    state: directory
+    mode: '0755'
+
+- name: Copy custom nginx proxy settings
+  become: true
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/custom_proxy_settings.conf"
+    dest: /etc/ansible-server/nginx/conf.d/custom_proxy_settings.conf
+    mode: '0644'
+
 - name: Run public-facing nginx-proxy container
   docker_container:
     name: nginx-proxy
@@ -11,7 +25,7 @@
       - "443:443"
     volumes:
       - nginx_certs:/etc/nginx/certs:ro
-      - nginx_conf:/etc/nginx/conf.d
+      - /etc/ansible-server/nginx/conf.d/:/etc/nginx/conf.d
       - nginx_html:/usr/share/nginx/html
       - nginx_vhost:/etc/nginx/vhost.d
       - /var/run/docker.sock:/tmp/docker.sock:ro
